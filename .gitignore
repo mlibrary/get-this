@@ -1,6 +1,7 @@
 coverage/
 # dependencies
 node_modules/
+.bundle/
 
 # environment variables
 .env
