@@ -38,58 +38,47 @@ const options = [
 <body>
   <m-universal-header></m-universal-header>
   <m-website-header></m-website-header>
-  <main>
-    <div class="viewport-container" role="presentation">
+  <main class="viewport-container">
     <h1 class="get-page-heading">
       <span class="subtle-heading">Select how to get this</span><br>
       {get.title}
     </h1>
 
+    <div class="get-details-aside-layout">
+      <div get="get-details-container">
+        {options.map((option) => (
+          <details class="get-details">
+            <summary>
+              <h2 class="get-details-title">{option.title}</h2><br>
+              <p>{option.subtitle}</p>
+            </summary>
 
-    {options.map((option) => (
-      <details class="get-details">
-        <summary>
-          <h2 class="get-details-title">{option.title}</h2><br>
-          <p>{option.subtitle}</p>
-        </summary>
+            <div>
+              <form class="get-form">
+                <label>
+                  You may find a label here.
+                  <input type="text" />
+                </label>
 
-        <div>
-          <form class="get-form">
-            <label>
-              You may find a label here.
-              <input type="text" />
-            </label>
+                <button class="button-most-important">Get me this</button>
+              </form>
+            </div>
+          </details>
+        ))}
+      </div>
 
-            <button class="button-most-important">Get me this</button>
-          </form>
-        </div>
-      </details>
-    ))}
+      <aside>
+        <dl class="record">
+          <dt>Location</dt><dd>Buhr Shelving Facility</dd>
+          <dt>Status</dt><dd>On Shelf <m-icon name="check-circle"></m-icon></dd>
+          <dt>Call Number</dt><dd>888 A7av tF55</dd>
+          <dt>Barcode</dt><dd>39015012938612</dd>
+          <dt>Help</dt><dd><m-chat></m-chat><a href="https://www.lib.umich.edu/ask-librarian">Ask a Librarian</a></dd>
+        </dl>
 
+        <p><a href={get.url}>Library Search Catalog record</a></p>
+      </aside>
     </div>
-
-    <div role="presentation" class="viewport-container">
-
-    <dl class="record">
-      <dt>Location</dt><dd>Buhr Shelving Facility</dd>
-      <dt>Status</dt><dd>On Shelf <m-icon name="check-circle"></m-icon></dd>
-      <dt>Call Number</dt><dd>888 A7av tF55</dd>
-      <dt>Barcode</dt><dd>39015012938612</dd>
-      <dt>Help</dt><dd><m-chat></m-chat><a href="https://www.lib.umich.edu/ask-librarian">Ask a Librarian</a></dd>
-    </dl>
-
-    <p><a href={get.url}>Library Search Catalog record</a></p>
-
-<!---
-    <h2 class="subtle-heading" style="margin-bottom: 0;">Hint</h2> 
-    <p style="display: inline;">Use <kbd>tab</kbd> to forward, <kbd>shift</kbd> and <kbd>tab</kbd> to backwards, and <kbd>enter</kbd> to select.</p>
-
-  Notes: what about making this public?
-
-    <section class="get-service-statement">
-      <p>We are committed to providing <a href="https://www.lib.umich.edu/about-us/about-library/diversity-equity-inclusion-and-accessibility">an equitable experience for all individuals by following accessibility standards</a>, responding to user feedback, and providing support and accommodations.</p>
-    </section>
--->
   </main>
 </body>
 </html>
