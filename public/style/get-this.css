@@ -56,12 +56,12 @@
 .get-url {
   text-decoration: none;
   color: var(--color-neutral-400);
+  text-decoration-color: var(--color-teal-400);
+  text-underline-offset: 3px;
 }
 
 .get-url:hover {
   text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-decoration-color: var(--color-teal-400);
 }
 
 summary::-webkit-details-marker {
