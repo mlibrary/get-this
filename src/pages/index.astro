@@ -41,7 +41,7 @@ const options = [
   <main class="viewport-container">
     <h1 class="get-page-heading">
       <span class="subtle-heading">Select how to get this</span><br>
-      <a href={get.url} class="get-url">{get.title}</a>
+      {get.title}
     </h1>
 
     {options.map((option) => (
@@ -63,8 +63,28 @@ const options = [
         </div>
       </details>
     ))}
-  </main>
 
-  <m-chat></m-chat>
+    <dl class="record">
+      <dt>Location</dt><dd>Buhr Shelving Facility</dd>
+      <dt>Status</dt><dd>On Shelf <m-icon name="check-circle"></m-icon></dd>
+      <dt>Call Number</dt><dd>888 A7av tF55</dd>
+      <dt>Barcode</dt><dd>39015012938612</dd>
+      <dt>Help</dt><dd><m-chat></m-chat><a href="https://www.lib.umich.edu/ask-librarian">Ask a Librarian</a></dd>
+    </dl>
+
+    <p><a href={get.url}>Library Search Catalog record</a></p>
+
+    <h2 class="subtle-heading" style="margin-bottom: 0;">Hint</h2> 
+
+    <p style="display: inline;">Use <kbd>tab</kbd> to forward, <kbd>shift</kbd> and <kbd>tab</kbd> to backwards, and <kbd>enter</kbd> to select.</p>
+<!---
+
+  Notes: what about making this public?
+
+    <section class="get-service-statement">
+      <p>We are committed to providing <a href="https://www.lib.umich.edu/about-us/about-library/diversity-equity-inclusion-and-accessibility">an equitable experience for all individuals by following accessibility standards</a>, responding to user feedback, and providing support and accommodations.</p>
+    </section>
+-->
+  </main>
 </body>
 </html>

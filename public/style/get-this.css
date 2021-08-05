@@ -12,7 +12,7 @@ html {
 
 .get-details:hover,
 .get-details[open] {
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px 0 rgba(101, 168, 191, 0.2);
 }
 
 .get-details[open] {
@@ -64,6 +64,10 @@ html {
   text-decoration-color: var(--color-teal-400);
 }
 
+summary::-webkit-details-marker {
+  color: var(--color-maize-400);
+}
+
 /*
   Forms
 */
@@ -93,4 +97,14 @@ input[type='text'] {
   font-family: inherit;
   box-sizing: border-box;
   background: none;
+}
+
+.get-service-statement {
+  position: fixed;
+  bottom: var(--space-large);
+  max-width: 68ch;
+}
+
+kbd {
+  font-size: var(--space-small);
 }
