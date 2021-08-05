@@ -38,11 +38,13 @@ const options = [
 <body>
   <m-universal-header></m-universal-header>
   <m-website-header></m-website-header>
-  <main class="viewport-container">
+  <main>
+    <div class="viewport-container" role="presentation">
     <h1 class="get-page-heading">
       <span class="subtle-heading">Select how to get this</span><br>
       {get.title}
     </h1>
+
 
     {options.map((option) => (
       <details class="get-details">
@@ -64,6 +66,10 @@ const options = [
       </details>
     ))}
 
+    </div>
+
+    <div role="presentation" class="viewport-container">
+
     <dl class="record">
       <dt>Location</dt><dd>Buhr Shelving Facility</dd>
       <dt>Status</dt><dd>On Shelf <m-icon name="check-circle"></m-icon></dd>
@@ -74,10 +80,9 @@ const options = [
 
     <p><a href={get.url}>Library Search Catalog record</a></p>
 
-    <h2 class="subtle-heading" style="margin-bottom: 0;">Hint</h2> 
-
-    <p style="display: inline;">Use <kbd>tab</kbd> to forward, <kbd>shift</kbd> and <kbd>tab</kbd> to backwards, and <kbd>enter</kbd> to select.</p>
 <!---
+    <h2 class="subtle-heading" style="margin-bottom: 0;">Hint</h2> 
+    <p style="display: inline;">Use <kbd>tab</kbd> to forward, <kbd>shift</kbd> and <kbd>tab</kbd> to backwards, and <kbd>enter</kbd> to select.</p>
 
   Notes: what about making this public?
 
