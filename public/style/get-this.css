@@ -1,0 +1,96 @@
+html {
+  background: linear-gradient(white, var(--color-blue-100));
+}
+
+.get-details {
+  border-radius: var(--radius-default);
+  margin-bottom: var(--space-medium);
+  border: solid 1px var(--color-neutral-100);
+  background: white;
+  max-width: 720px;
+}
+
+.get-details:hover,
+.get-details[open] {
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.get-details[open] {
+  border-color: var(--color-teal-400);
+}
+
+.get-details > div {
+  padding: var(--space-large);
+}
+
+.get-details:hover {
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.get-details summary {
+  cursor: pointer;
+  padding: var(--space-large);
+  text-decoration: none;
+  border-radius: var(--radius-default);
+  height: 100%;
+}
+
+.get-details[open] summary {
+  border-radius: var(--radius-default) var(--radius-default) 0 0;
+}
+
+.get-details summary > * {
+  display: inline;
+}
+
+.get-details summary:hover .get-details-title {
+  text-decoration-thickness: 2px;
+}
+
+.get-details-title {
+  text-decoration: underline;
+  font-size: var(--space-medium);
+  text-decoration-color: var(--color-teal-400);
+}
+
+.get-url {
+  text-decoration: none;
+  color: var(--color-neutral-400);
+}
+
+.get-url:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--color-teal-400);
+}
+
+/*
+  Forms
+*/
+
+.get-form > *:not(:last-child) {
+  margin-bottom: var(--space-medium);
+}
+
+label {
+  display: block;
+  font-weight: 600;
+}
+
+button {
+  margin: 0;
+}
+
+input[type='text'] {
+  font-size: 1rem;
+  margin: 0;
+  border: solid 1px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: var(--space-small);
+  width: 100%;
+  appearance: textfield;
+  font-family: inherit;
+  box-sizing: border-box;
+  background: none;
+}
