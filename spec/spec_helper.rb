@@ -130,3 +130,6 @@ end
     stub_request(name, "#{ENV["ALMA_API_HOST"]}/almaws/v1/#{url}").with( **req_attributes).to_return(**resp)   
   end
 end
+def fixture(path)
+  File.read("./spec/fixtures/#{path}")
+end
