@@ -36,6 +36,16 @@ bundle install
 docker-compose run --rm web bundle install
 ```
 
+npm install
+```
+docker-compose run --rm npm install
+```
+
+build css
+```
+docker-compose run --rm npm run build
+```
+
 start containers
 
 ```
