@@ -4,7 +4,7 @@ describe "requests" do
   context "/" do
     it "shows Get This" do
       get '/'
-      expect(last_response.body).to include('Get This')
+      expect(last_response.body).to include('Library Search')
     end
   end
 end

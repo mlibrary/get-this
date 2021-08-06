@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "postcss css/index.css --use cssnano --dir public/bundles" 
+    "build": "postcss ./css/index.css --use cssnano --dir ./public/bundles" 
   },
   "repository": {
     "type": "git",
