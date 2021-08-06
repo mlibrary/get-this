@@ -1,0 +1,11 @@
+{
+  "booking_availability": [
+    {
+      "from_time": "2021-10-26T16:07:00Z",
+      "to_time": "2021-10-29T03:59:00Z",
+      "user_id": "emcard",
+      "user_full_name": "Emily Card",
+      "reason": "Reserved"
+    }
+  ]
+}

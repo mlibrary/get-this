@@ -7,6 +7,7 @@ public/bundles/
 .bash_history
 .npm/
 .config/
+.irb_history
 
 # environment variables
 .env

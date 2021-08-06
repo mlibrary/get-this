@@ -18,6 +18,12 @@ class Item
   def library
     @data.dig("item_data", "library", "desc")
   end
+  def library_code
+    @data.dig("item_data", "library", "value")
+  end
+  def bookable?
+    @data.dig("item_data", "library", "value") == 'FVL'
+  end
   def call_number
     @data.dig("holding_data", "call_number")
   end
