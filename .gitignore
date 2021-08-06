@@ -2,6 +2,11 @@ coverage/
 # dependencies
 node_modules/
 .bundle/
+public/bundles/
+.byebug_history
+.bash_history
+.npm/
+.config/
 
 # environment variables
 .env

@@ -11,6 +11,14 @@ services:
     env_file:
       - .env
       - .env-dev-values
+    command: bundle exec ruby get-this.rb  -o 0.0.0.0
+
+  css:
+    build: .
+    volumes:
+      - .:/app
+      - gem_cache:/gems
+    command: bundle exec ruby ./config/css-listener.rb
 
 volumes:
   gem_cache:

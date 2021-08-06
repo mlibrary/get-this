@@ -1,0 +1,25 @@
+{
+  "name": "get-this",
+  "version": "1.0.0",
+  "description": "Implements date picker for booking a media item",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "postcss css/index.css --use cssnano --dir public/bundles" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlibrary/get-this.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mlibrary/get-this/issues"
+  },
+  "homepage": "https://github.com/mlibrary/get-this#readme",
+  "devDependencies": {
+    "cssnano": "^5.0.7",
+    "postcss": "^8.3.6",
+    "postcss-cli": "^8.3.1"
+  }
+}

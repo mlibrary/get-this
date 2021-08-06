@@ -1,1 +1,40 @@
-<h1>Get This</h1>
+<h1>
+  <span class="subtle-heading">Select how to get this</span><br>
+  <a href={get.url} class="get-url">{get.title}</a>
+</h1>
+
+<div class="get-details-aside-layout">
+  <div get="get-details-container">
+    {options.map((option) => (
+      <details class="get-details">
+        <summary>
+          <h2 class="get-details-title">{option.title}</h2><br>
+          <p>{option.subtitle}</p>
+        </summary>
+
+        <div>
+          <form class="get-form">
+            <label>
+              You may find a label here.
+              <input type="text" />
+            </label>
+
+            <button class="button-most-important">Get me this</button>
+          </form>
+        </div>
+      </details>
+    ))}
+  </div>
+
+  <aside>
+    <dl class="record">
+      <dt>Location</dt><dd><a href={get.locationUrl}>Buhr Shelving Facility</a></dd>
+      <dt>Status</dt><dd>On Shelf <m-icon name="check-circle"></m-icon></dd>
+      <dt>Call number</dt><dd>888 A7av tF55</dd>
+      <dt>Barcode</dt><dd>39015012938612</dd>
+      <dt>Help</dt><dd><m-chat></m-chat><a href="https://www.lib.umich.edu/ask-librarian">Ask a Librarian</a></dd>
+    </dl>
+
+    <p><a href={get.url}>Library Search Catalog record</a></p>
+  </aside>
+</div>
