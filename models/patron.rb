@@ -26,15 +26,14 @@ class Patron
   end
   
   class NotInAlma < self
-    ["user_group" ].each do |name|
-      define_method(name) do
-        nil
-      end
+    def user_group
+      ''
     end
     def statistic_categories
       []
     end
   end
+
   private
   def has_category(category)
     statistic_categories.any?{|stat| stat == category}
