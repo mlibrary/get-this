@@ -6,6 +6,7 @@ ruby '3.0.2'
 gem 'sinatra'
 gem 'httparty'
 gem 'thin'
+gem 'activesupport' #in here because of timezone support
 
 gem 'alma_rest_client',
   git: 'https://github.com/mlibrary/alma_rest_client', 

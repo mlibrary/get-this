@@ -16,10 +16,14 @@ class Option
     end
     def booked_dates
       @data["booking_availability"]&.map do |booking|
-        start_date = Date.parse(booking["from_time"])
-        end_date = Date.parse(booking["to_time"])
-        number_of_days = (end_date - start_date).to_i
-        (0 .. number_of_days - 1).map{|n| start_date.next_day(n).to_s }
+        start_date = (Time.zone.parse(booking["from_time"]) - 2.days).to_date
+        end_date = Time.zone.parse(booking["to_time"]).to_date
+        dates =  []
+        while start_date <= end_date
+          dates.push(start_date.to_s(:db)) 
+          start_date = start_date + 1.day
+        end
+        dates
       end&.flatten&.sort
     end
   end

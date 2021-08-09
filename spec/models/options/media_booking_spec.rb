@@ -8,8 +8,8 @@ describe Option::MediaBooking do
     described_class.for(@item)
   end
   context "#booked_dates"  do
-    it "returns an array of dates" do
-      expect(subject.booked_dates).to eq(["2021-10-26","2021-10-27", "2021-10-28"])
+    it "returns an array of dates that includes head time of two days" do
+      expect(subject.booked_dates).to eq(["2021-10-24","2021-10-25","2021-10-26","2021-10-27", "2021-10-28"])
     end
     it "returns nil for not booked item" do
       @output["booking_availability"] = nil
