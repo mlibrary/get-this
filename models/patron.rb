@@ -26,6 +26,8 @@ class Patron
   end
   
   class NotInAlma < self
+    def initialize
+    end
     def user_group
       ''
     end

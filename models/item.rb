@@ -45,6 +45,8 @@ class Item
   end
 
   class EmptyItem
+    def initialize
+    end
     ['title'].each do |name|
       define_method(name) do
         ''
