@@ -8,20 +8,23 @@ class ClosedDays
   def all_days
     @data["open_hour"].filter_map do |entity|
       if entity.dig("status", "value") == "CLOSE"
-        start_date = Date.parse(entity["from_date"])
-        end_date = Date.parse(entity["to_date"])
-        number_of_days = (end_date - start_date).to_i
-        if number_of_days == 0
-          start_date
-        else
-          (0 .. number_of_days - 1).map{|n| start_date.next_day(n) }
+        start_date = Time.zone.parse(entity["from_date"]).to_date
+        end_date = Time.zone.parse(entity["to_date"]).to_date
+        dates = []
+        while start_date <= end_date
+          dates.push(start_date) 
+          start_date = start_date + 1.day
         end
+        dates
       end
     end &.flatten&.sort 
   end
-  def closed_days_between(start_date: Date.today, end_date:)
+  def closed_days_between(start_date: Time.zone.today.to_date, end_date:)
     all_days.filter_map do |date|
-      date.to_s if date > start_date && date < end_date 
+      date if date >= start_date && date <= end_date 
     end
+  end
+  def closed?(date)
+    all_days.any?{|x| x == date }
   end
 end
