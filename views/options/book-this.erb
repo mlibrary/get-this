@@ -18,8 +18,9 @@
 
       <label for="date">Pick up date:</label>
       <select>
-        <option>Tuesday, 5 February, 2021</option>
-        <option>Wednesday, 6 February, 2021</option>
+        <% option.unavailable_dates.each do |date| %>
+          <option value="<%=date%>"><%=date%></option>
+        <% end %>
       </select>
 
       <button class="button-most-important">Book this item</button>

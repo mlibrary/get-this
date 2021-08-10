@@ -6,7 +6,11 @@
 <div class="get-options-aside-layout">
   <div get="get-options-container">
     <% options.each do |option| %>
-      <% option.type == "book-this" ? render "options/get-this" : "Not available." %>
+      <% if option.type == "book-this" %>
+        <%= erb :"options/book-this", locals: {option: option} %> 
+      <%else %>
+         "Not available." 
+      <%end %>
     <% end %>
   </div>
 

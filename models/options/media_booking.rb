@@ -13,7 +13,11 @@ class Option
     end
     def initialize(data:, closed_days: ClosedDays.new)
       @data = data
-      @closed_days = closed_days
+      #@closed_days = closed_days
+      @closed_days = []
+    end
+    def type
+      'book-this'
     end
     def title
       'Media Booking'
@@ -29,7 +33,7 @@ class Option
 
         while head_time_counter < num_days_head_time
           start_date = start_date - 1.day
-          head_time_counter = head_time_counter + 1 unless @closed_days.closed?(start_date)
+          head_time_counter = head_time_counter + 1 unless @closed_days&.closed?(start_date)
         end
 
         dates =  []
@@ -41,9 +45,10 @@ class Option
       end&.flatten&.sort
     end
     def unavailable_dates
-      closed = @closed_days.closed_days_between(end_date: Time.zone.today + 9.months).map do |x|
-        x.to_s(:db)
-      end
+      #closed = @closed_days.closed_days_between(end_date: Date.today + 9.months).map do |x|
+        #x.to_s(:db)
+      #end
+      closed = []
       [booked_dates, closed].flatten.uniq.sort
     end
     private

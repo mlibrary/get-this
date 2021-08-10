@@ -7,12 +7,12 @@ require_relative "./models/patron"
 require_relative "./models/item"
 require_relative "./models/options/media_booking"
 require_relative "./models/options"
-require_relative "./lib/closed_days.rb"
+require_relative "./lib/closed_days"
 
 Time.zone = 'Eastern Time (US & Canada)'
 
 before  do
-  session[:uniqname] == 'mrio' unless session[:uniqname]
+  session[:uniqname] = 'mrio' unless session[:uniqname]
 end
 
 get '/:barcode' do
