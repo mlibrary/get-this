@@ -1,29 +1,34 @@
-<details class="get-details">
+<details class="get-option" open>
   <summary>
-    <h2 class="get-options-title"><%=option.title %></h2><br>
+    <h2 class="get-option-title"><%=option.title %></h2><br>
     <p><%=option.subtitle %></p>
   </summary>
-  <div>
-    <ul>
+  <form>
+    <label>Pick up location</label>
+    <select style="margin-bottom: var(--space-medium);">
+      <option value="WHAT_IS_THIS?">Shapiro Undergraduate Library</option>
+    </select>
+
+    <label for="date">Pick up date</label>
+    <!--
+    <select style="margin-bottom: var(--space-medium);">
       <% option.unavailable_dates.each do |date| %>
-        <li><%= date %></li>
+        <option value="<%=date%>"><%=date%></option>
       <% end %>
-    </ul>
-    
-    <form class="get-form">
-      <label>Pickup location</label>
-      <select>
-        <option value="WHAT_IS_THIS?">Shapiro Undergraduate Library</option>
-      </select>
+    </select>
+    -->
 
-      <label for="date">Pick up date:</label>
-      <select>
-        <% option.unavailable_dates.each do |date| %>
-          <option value="<%=date%>"><%=date%></option>
-        <% end %>
-      </select>
+    <select style="margin-bottom: var(--space-small);">
+      <optgroup label="August 2021">
+        <option>Tuesday, August 10</option>
+        <option>Wednesday, August 11</option>
+        <option>Thursday, August 12</option>
+        <option disabled>(booked) Friday, August 13</option>
+      </optgroup>
+    </select>
 
-      <button class="button-most-important">Book this item</button>
-    </form>
-  </div>
+    <br>
+
+    <button class="button-most-important" style="margin-top: var(--space-small);">Book this item</button>
+  </form>
 </details>

@@ -54,3 +54,13 @@ start containers
 ```
 docker-compose up -d
 ```
+
+run npm scriptss directly
+
+```
+docker compose run --rm web bash
+...
+$ npm run build
+...
+exit
+```

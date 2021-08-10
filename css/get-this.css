@@ -1,33 +1,38 @@
-.get-options-aside-layout {
-  display: display;
-  flex-wrap: wrap;
-  gap: var(--space-xxx-large);
+@media (min-width: 1000px) {
+  .get-this-layout {
+    display: grid;
+    grid-template-columns: 2fr minmax(240px, 1fr);
+    gap: 0 var(--space-x-large);
+  }
 }
 
-.get-details {
+.get-this-metdata {
+  grid-column: 2;
+  padding-bottom: var(--space-xxx-large);
+}
+
+.get-option {
   border-radius: var(--radius-default);
   margin-bottom: var(--space-medium);
-  border: solid 1px var(--color-neutral-100);
+  border: solid 1px var(--color-neutral-400);
   background: white;
-  max-width: 720px;
+  grid-column: 1;
+  align-self: start;
+  height: min-content;
 }
 
-.get-details:hover {
+.get-option:hover {
   box-shadow: 0 2px 8px 0 rgba(138, 150, 161, 0.5);
 }
-.get-details[open] {
+.get-option[open] {
   box-shadow: 0 2px 8px 0 rgba(16, 102, 132, 0.5);
 }
 
-.get-details[open] {
+.get-option[open] {
   border-color: var(--color-teal-400);
 }
 
-.get-details > div {
-  padding: var(--space-large);
-}
-
-.get-details summary {
+.get-option summary {
   cursor: pointer;
   padding: var(--space-large);
   text-decoration: none;
@@ -35,19 +40,24 @@
   height: 100%;
 }
 
-.get-details[open] summary {
+.get-option summary + * {
+  padding: var(--space-large);
+  padding-top: 0;
+}
+
+.get-option[open] summary {
   border-radius: var(--radius-default) var(--radius-default) 0 0;
 }
 
-.get-details summary > * {
+.get-option summary > * {
   display: inline;
 }
 
-.get-details summary:hover .get-options-title {
+.get-option summary:hover .get-option-title {
   text-decoration-thickness: 2px;
 }
 
-.get-options-title {
+.get-option-title {
   text-decoration: underline;
   font-size: var(--space-medium);
   text-decoration-color: var(--color-teal-400);
@@ -72,13 +82,10 @@ summary::-webkit-details-marker {
   Forms
 */
 
-.get-form > *:not(:last-child) {
-  margin-bottom: var(--space-medium);
-}
-
 label {
   display: block;
   font-weight: 600;
+  margin-bottom: var(--space-xx-small);
 }
 
 button {
@@ -99,17 +106,25 @@ input[type='text'] {
   background: none;
 }
 
-.get-service-statement {
-  position: fixed;
-  bottom: var(--space-large);
-  max-width: 68ch;
-}
-
-kbd {
-  font-size: var(--space-small);
-}
-
 dl.record {
   margin-top: 0;
   width: auto;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+
+  padding: var(--space-small) var(--space-medium);
+  font-family: inherit;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: solid 1px var(--color-neutral-400);
+  cursor: pointer;
+}
+
+form {
+  margin: 0;
 }
