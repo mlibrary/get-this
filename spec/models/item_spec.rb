@@ -48,5 +48,25 @@ describe Item do
       expect(subject.catalog_url).to eq("https://search.lib.umich.edu/catalog/record/990003116350106381")
     end
   end
+  context "#bookable?" do
+    it "returns false if item is not in FVL" do
+      expect(subject.bookable?).to eq(false)
+    end
+    it "returns true if item is in FVL and isn't Loan 8 or Loan 9" do
+      #@output["item_data"]["policy"]["value"]
+      @output["item_data"]["library"]["value"] = 'FVL'
+      expect(subject.bookable?).to eq(true)
+    end
+    it "returns false if FVL and loan 8" do
+      @output["item_data"]["policy"]["value"] = '08'
+      @output["item_data"]["library"]["value"] = 'FVL'
+      expect(subject.bookable?).to eq(false)
+    end
+    it "returns false if FVL and loan 9" do
+      @output["item_data"]["policy"]["value"] = '09'
+      @output["item_data"]["library"]["value"] = 'FVL'
+      expect(subject.bookable?).to eq(false)
+    end
+  end
 
 end

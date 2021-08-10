@@ -21,8 +21,11 @@ class Item
   def library_code
     @data.dig("item_data", "library", "value")
   end
+  def item_policy
+    @data.dig("item_data", "policy", "value")
+  end
   def bookable?
-    @data.dig("item_data", "library", "value") == 'FVL'
+     library_code == 'FVL' && ['08','09'].exclude?(item_policy)
   end
   def call_number
     @data.dig("holding_data", "call_number")
@@ -47,7 +50,7 @@ class Item
   class EmptyItem
     def initialize
     end
-    ['title'].each do |name|
+    ['title', 'catalog_url'].each do |name|
       define_method(name) do
         ''
       end

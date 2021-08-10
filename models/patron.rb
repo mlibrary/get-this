@@ -38,7 +38,7 @@ class Patron
 
   private
   def has_category(category)
-    statistic_categories.any?{|stat| stat == category}
+    statistic_categories&.any?{|stat| stat == category}
   end
   def staff?
     user_group == "02"

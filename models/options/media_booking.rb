@@ -1,6 +1,6 @@
 class Option
-  class MediaBooking
-    def self.match(patron:, item:)
+  class MediaBooking < Option
+    def self.match?(patron:, item:)
       patron.can_book? && item.bookable?
     end
     def self.for(item, options={})
@@ -14,6 +14,12 @@ class Option
     def initialize(data:, closed_days: ClosedDays.new)
       @data = data
       @closed_days = closed_days
+    end
+    def title
+      'Media Booking'
+    end
+    def subtitle
+      'Booketh ye media'
     end
     def booked_dates
       @data["booking_availability"]&.map do |booking|
