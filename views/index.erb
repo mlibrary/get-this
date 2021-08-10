@@ -1,33 +1,12 @@
 <h1>
-  <span class="subtle-heading">Select how to get this</span><br>
+  <span class="subtle-heading">Select how to get this item</span><br>
   <a href="<%=item.catalog_url%>" class="get-url"><%=item.title%></a>
 </h1>
 
-<div class="get-details-aside-layout">
-  <div get="get-details-container">
+<div class="get-options-aside-layout">
+  <div get="get-options-container">
     <% options.each do |option| %>
-      <details class="get-details">
-        <summary>
-          <h2 class="get-details-title"><%=option.title %></h2><br>
-          <p><%=option.subtitle %></p>
-        </summary>
-        <div>
-          <p>Unavailable Dates:</p>
-          <ul>
-            <% option.unavailable_dates.each do |date| %>
-              <li><%= date %></li>
-            <% end %>
-          
-          <form class="get-form">
-            <label>
-              You may find a label here.
-              <input type="text" />
-            </label>
-
-            <button class="button-most-important">Get me this</button>
-          </form>
-        </div>
-      </details>
+      <% option.type == "book-this" ? render "options/get-this" : "Not available." %>
     <% end %>
   </div>
 

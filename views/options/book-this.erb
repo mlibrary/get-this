@@ -1,0 +1,28 @@
+<details class="get-details">
+  <summary>
+    <h2 class="get-options-title"><%=option.title %></h2><br>
+    <p><%=option.subtitle %></p>
+  </summary>
+  <div>
+    <ul>
+      <% option.unavailable_dates.each do |date| %>
+        <li><%= date %></li>
+      <% end %>
+    </ul>
+    
+    <form class="get-form">
+      <label>Pickup location</label>
+      <select>
+        <option value="WHAT_IS_THIS?">Shapiro Undergraduate Library</option>
+      </select>
+
+      <label for="date">Pick up date:</label>
+      <select>
+        <option>Tuesday, 5 February, 2021</option>
+        <option>Wednesday, 6 February, 2021</option>
+      </select>
+
+      <button class="button-most-important">Book this item</button>
+    </form>
+  </div>
+</details>

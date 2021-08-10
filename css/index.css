@@ -1,4 +1,4 @@
-.get-details-aside-layout {
+.get-options-aside-layout {
   display: display;
   flex-wrap: wrap;
   gap: var(--space-xxx-large);
@@ -43,11 +43,11 @@
   display: inline;
 }
 
-.get-details summary:hover .get-details-title {
+.get-details summary:hover .get-options-title {
   text-decoration-thickness: 2px;
 }
 
-.get-details-title {
+.get-options-title {
   text-decoration: underline;
   font-size: var(--space-medium);
   text-decoration-color: var(--color-teal-400);

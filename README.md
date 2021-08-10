@@ -1,4 +1,5 @@
 # Get This
+
 Implements date picker for booking a media item
 
 ## Setting up Get This for development
@@ -16,13 +17,12 @@ copy .env-example to .env
 cp .env-example .env
 ```
 
-edit .env with the following environment variables. 
+edit .env with the following environment variables.
 
 ```ruby
-#.env/development/web
+#.env
 ALMA_API_KEY='YOURAPIKEY'
 ALMA_API_HOST='https://api-na.hosted.exlibrisgroup.com'
-
 ```
 
 build container
@@ -32,16 +32,19 @@ docker-compose build
 ```
 
 bundle install
+
 ```
 docker-compose run --rm web bundle install
 ```
 
 npm install
+
 ```
 docker-compose run --rm npm install
 ```
 
 build css
+
 ```
 docker-compose run --rm npm run build
 ```

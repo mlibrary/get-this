@@ -2,7 +2,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <title>{title}</title>
+    <title>Get This "<%= item.title %>" | University of Michigan Library</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
     <link href="https://unpkg.com/@umich-lib/web/umich-lib.css" rel="stylesheet"/>
@@ -13,7 +13,7 @@
   </head>
   <body>
     <m-universal-header></m-universal-header>
-    <m-website-header name="Library Search" to="https://search.lib.umich.edu/everything"></m-website-header>
+    <m-website-header name="Get This" to="https://search.lib.umich.edu/everything"></m-website-header>
     <main class="viewport-container">
       <%= yield %>
     </main>
