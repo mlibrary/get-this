@@ -19,7 +19,7 @@
 </details>
 
 <script>
-  const bookedDates = [] // TODO: MONIQUE! Data!
+  const bookedDates = [<%= option.unavailable_dates_formatted %>] // TODO: MONIQUE! Data!
 
   function isBooked(date) {
     return bookedDates.includes(date)

@@ -47,13 +47,17 @@ class Item
     "https://search.lib.umich.edu/catalog/record/#{mms_id}"
   end
 
-  class EmptyItem
+  class EmptyItem < self
     def initialize
+      @data = {}
     end
-    ['title', 'catalog_url', "library"].each do |name|
-      define_method(name) do
-        ''
-      end
+    #['title', 'catalog_url', "library", "call_number", "pid",].each do |name|
+      #define_method(name) do
+        #''
+      #end
+    #end
+    def bookable?
+      false
     end
   end
 end
