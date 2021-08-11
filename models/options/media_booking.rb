@@ -13,8 +13,7 @@ class Option
     end
     def initialize(data:, closed_days: ClosedDays.new)
       @data = data
-      #@closed_days = closed_days
-      @closed_days = []
+      @closed_days = closed_days
     end
     def type
       'book-this'
@@ -23,7 +22,7 @@ class Option
       'Media Booking'
     end
     def subtitle
-      'Booketh ye media'
+      'Book þe media'
     end
     def booked_dates
       @data["booking_availability"]&.map do |booking|
@@ -33,7 +32,7 @@ class Option
 
         while head_time_counter < num_days_head_time
           start_date = start_date - 1.day
-          head_time_counter = head_time_counter + 1 unless @closed_days&.closed?(start_date)
+          head_time_counter = head_time_counter + 1 unless @closed_days.closed?(start_date)
         end
 
         dates =  []
@@ -42,13 +41,12 @@ class Option
           start_date = start_date + 1.day
         end
         dates
-      end&.flatten&.sort
+      end&.flatten&.sort || []
     end
     def unavailable_dates
-      #closed = @closed_days.closed_days_between(end_date: Date.today + 9.months).map do |x|
-        #x.to_s(:db)
-      #end
-      closed = []
+      closed = @closed_days.closed_days_between(end_date: Time.zone.today + 9.months).map do |x|
+        x.to_s(:db)
+      end
       [booked_dates, closed].flatten.uniq.sort
     end
     private

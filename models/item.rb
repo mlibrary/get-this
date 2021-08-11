@@ -50,7 +50,7 @@ class Item
   class EmptyItem
     def initialize
     end
-    ['title', 'catalog_url'].each do |name|
+    ['title', 'catalog_url', "library"].each do |name|
       define_method(name) do
         ''
       end
