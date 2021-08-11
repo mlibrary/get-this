@@ -19,9 +19,9 @@ describe Option::MediaBooking do
       allow(@closed_days).to receive(:closed?).with(Date.parse("2021-10-24")).and_return(true)
       expect(subject.booked_dates).to eq(["2021-10-22","2021-10-23", "2021-10-24","2021-10-25","2021-10-26","2021-10-27", "2021-10-28"])
     end
-    it "returns nil for not booked item" do
+    it "returns empty array for not booked item" do
       @output["booking_availability"] = nil
-      expect(subject.booked_dates).to be_nil
+      expect(subject.booked_dates).to []
     end
 
   end
