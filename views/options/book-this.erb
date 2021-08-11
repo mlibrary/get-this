@@ -1,29 +1,36 @@
-<details class="get-details">
+<details class="get-option" open>
   <summary>
-    <h2 class="get-options-title"><%=option.title %></h2><br>
+    <h2 class="get-option-title"><%=option.title %></h2><br>
     <p><%=option.subtitle %></p>
   </summary>
-  <div>
-    <ul>
-      <% option.unavailable_dates.each do |date| %>
-        <li><%= date %></li>
-      <% end %>
-    </ul>
-    
-    <form class="get-form">
-      <label>Pickup location</label>
-      <select>
-        <option value="WHAT_IS_THIS?">Shapiro Undergraduate Library</option>
-      </select>
+  <form>
+    <label>Pick up location</label>
+    <select style="margin-bottom: var(--space-medium);">
+      <option value="WHAT_IS_THIS?">Shapiro Undergraduate Library</option>
+    </select>
 
-      <label for="date">Pick up date:</label>
-      <select>
-        <% option.unavailable_dates.each do |date| %>
-          <option value="<%=date%>"><%=date%></option>
-        <% end %>
-      </select>
+    <label for="date">Pick up date</label>
+    <duet-date-picker identifier="date"></duet-date-picker>
 
-      <button class="button-most-important">Book this item</button>
-    </form>
-  </div>
+    <br>
+
+    <button class="button-most-important" style="margin-top: var(--space-small);">Book this item</button>
+  </form>
 </details>
+
+<script>
+  const bookedDates = [] // TODO: MONIQUE! Data!
+
+  function isBooked(date) {
+    return bookedDates.includes(date)
+  }
+
+  const datePicker = document.querySelector("duet-date-picker")
+  datePicker.isDateDisabled = isBooked
+
+  datePicker.addEventListener("duetChange", function(e) {
+    if (isBooked(e.detail.valueAsDate)) {
+      alert("Please select an available booking date.")
+    }
+  })
+</script>

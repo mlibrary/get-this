@@ -19,10 +19,10 @@ class Option
       'book-this'
     end
     def title
-      'Media Booking'
+      'Pick up media at the library'
     end
     def subtitle
-      'Book þe media'
+      'Book this item (Expected availability 1-3 days)'
     end
     def booked_dates
       @data["booking_availability"]&.map do |booking|
@@ -48,6 +48,9 @@ class Option
         x.to_s(:db)
       end
       [booked_dates, closed].flatten.uniq.sort
+    end
+    def unavailable_dates_formatted
+      unavailable_dates.map{|x| "\"#{x}\""}.join(", ")
     end
     private
     def num_days_head_time
