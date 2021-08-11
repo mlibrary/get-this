@@ -109,6 +109,7 @@ input[type='text'] {
 dl.record {
   margin-top: 0;
   width: auto;
+  grid-template-columns: 8rem 1fr;
 }
 
 select {
