@@ -19,18 +19,18 @@
 </details>
 
 <script>
-  const bookedDates = [<%= option.unavailable_dates_formatted %>] // TODO: MONIQUE! Data!
+  const unavailableDates = [<%= option.unavailable_dates_formatted %>] 
 
-  function isBooked(date) {
-    return bookedDates.includes(date)
+  function isDateDisabled(date) {
+    return unavailableDates.includes(date)
   }
 
   const datePicker = document.querySelector("duet-date-picker")
-  datePicker.isDateDisabled = isBooked
+  datePicker.isDateDisabled = isDateDisabled
 
   datePicker.addEventListener("duetChange", function(e) {
     if (isBooked(e.detail.valueAsDate)) {
-      alert("Please select an available booking date.")
+      alert(`This item is not available on the date you provided.`)
     }
   })
 </script>
