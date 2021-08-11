@@ -10,25 +10,27 @@
     </select>
 
     <label for="date">Pick up date</label>
-    <!--
-    <select style="margin-bottom: var(--space-medium);">
-      <% option.unavailable_dates.each do |date| %>
-        <option value="<%=date%>"><%=date%></option>
-      <% end %>
-    </select>
-    -->
-
-    <select style="margin-bottom: var(--space-small);">
-      <optgroup label="August 2021">
-        <option>Tuesday, August 10</option>
-        <option>Wednesday, August 11</option>
-        <option>Thursday, August 12</option>
-        <option disabled>(booked) Friday, August 13</option>
-      </optgroup>
-    </select>
+    <duet-date-picker identifier="date"></duet-date-picker>
 
     <br>
 
     <button class="button-most-important" style="margin-top: var(--space-small);">Book this item</button>
   </form>
 </details>
+
+<script>
+  const bookedDates = [] // TODO: MONIQUE! Data!
+
+  function isBooked(date) {
+    return bookedDates.includes(date)
+  }
+
+  const datePicker = document.querySelector("duet-date-picker")
+  datePicker.isDateDisabled = isBooked
+
+  datePicker.addEventListener("duetChange", function(e) {
+    if (isBooked(e.detail.valueAsDate)) {
+      alert("Please select an available booking date.")
+    }
+  })
+</script>
