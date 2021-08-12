@@ -2,10 +2,8 @@ describe Option::MediaBooking do
   before(:each) do
     @output = JSON.parse(fixture('booking_availability.json'))
     @closed_days = instance_double(ClosedDays)
-    #@item = instance_double(Item, mms_id: 'mms_id', holding_id: 'holding_id', pid: 'pid')
   end
   subject do
-    #stub_alma_get_request(url: "bibs/mms_id/holdings/holding_id/items/pid/booking-availability", query: {period: 9, period_type: 'months'}, output: @output.to_json)
     described_class.new(data: @output, closed_days: @closed_days)
   end
   context "#booked_dates"  do
@@ -21,7 +19,7 @@ describe Option::MediaBooking do
     end
     it "returns empty array for not booked item" do
       @output["booking_availability"] = nil
-      expect(subject.booked_dates).to []
+      expect(subject.booked_dates).to eq([])
     end
 
   end

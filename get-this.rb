@@ -11,11 +11,20 @@ require_relative "./models/options/media_booking"
 require_relative "./models/options"
 require_relative "./lib/closed_days"
 
+enable :sessions
+set server: 'thin', connections: []
 
 before  do
-  session[:uniqname] = 'mrio' unless session[:uniqname]
+  session[:uniqname] = 'mlibrary.acct.testing1@gmail.com' unless session[:uniqname]
   Time.zone = 'Eastern Time (US & Canada)'
 end
+
+# :nocov:
+get '/session_switcher' do
+  session[:uniqname] = params[:uniqname]
+  redirect "/#{params[:barcode]}"
+end
+# :nocov:
 
 get '/:barcode' do
   barcode = params['barcode'] #need to check that this is valid barcode

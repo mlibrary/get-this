@@ -24,16 +24,15 @@ describe Patron do
       @output["user_group"]["value"] = "01"
       expect(subject.can_book?).to eq(true)
     end
-    it "returns true for gsi" do
-      @output["user_group"]["value"] = "03"
-      @output["user_statistic"][0]["statistic_category"]["value"] = 'GE'
+    it "returns true for temporary_staff" do
+      @output["user_group"]["value"] = "14"
       expect(subject.can_book?).to eq(true)
     end
-    it "returns true for faculty proxy" do
-      @output["user_group"]["value"] = "04"
-      @output["user_statistic"][0]["statistic_category"]["value"] = 'PR'
-      expect(subject.can_book?).to eq(true)
-    end
+    #it "returns true for faculty proxy" do
+      #@output["user_group"]["value"] = "04"
+      #@output["user_statistic"][0]["statistic_category"]["value"] = 'PR'
+      #expect(subject.can_book?).to eq(true)
+    #end
     it "returns false for non gsi / faculty proxy graduate student" do
       @output["user_group"]["value"] = "03"
       expect(subject.can_book?).to eq(false)

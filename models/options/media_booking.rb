@@ -43,6 +43,17 @@ class Option
         dates
       end&.flatten&.sort || []
     end
+    def pickup_locations
+      [ 
+        {code: 'SHAP', display: 'Shapiro Undergraduate Library'},
+        {code: 'AAEL', display: 'Art Architecture & Engineering'},
+        {code: 'MUSIC', display: 'Music'},
+        {code: 'BURH', display: 'Burh Shelving Facility'},
+        {code: 'TAUB', display: 'Taubman Health Sciences'},
+        {code: 'FLINT', display: 'UM-Flint'},
+        {code: 'DRBN', display: 'Mardigan Library'},
+      ].map{|x| OpenStruct.new(code: x[:code], display: x[:display]) }
+    end
     def unavailable_dates
       closed = @closed_days.closed_days_between(end_date: Time.zone.today + 9.months).map do |x|
         x.to_s(:db)

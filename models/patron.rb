@@ -22,7 +22,7 @@ class Patron
   end
 
   def can_book?
-    faculty? || staff? || gsi? || faculty_proxy?
+    faculty? || staff? || temporary_staff? #|| faculty_proxy?
   end
   
   class NotInAlma < self
@@ -46,11 +46,11 @@ class Patron
   def faculty?
     user_group == "01"
   end
-  def gsi?
-    has_category('GE')
+  def temporary_staff?
+    user_group == "14"
   end
-  def faculty_proxy?
-    has_category('PR')
-  end
+  #def faculty_proxy?
+    #has_category('PR')
+  #end
 end
 
