@@ -3,6 +3,19 @@ class Option
     def self.match?(patron:, item:)
       patron.can_book? && item.bookable?
     end
+    def self.book(uniqname:, barcode:, booking_date:, pickup_location:, client: AlmaRestClient.client, item: Item.for(barcode)) 
+     
+      #3:00 pm because if a library is open at all it is open at 3
+      start_date = Time.zone.parse("#{booking_date} 3:00pm")
+      #TBD error out if EmptyItem
+      client.post("/users/#{uniqname}/requests", query: {item_pid: item.pid}, body: {
+        request_type: 'BOOKING',
+        pickup_location_type: 'LIBRARY',
+        pickup_location_library: pickup_location,
+        booking_start_date: start_date.to_s(:iso8601),
+        booking_end_date: (start_date + 2.days).to_s(:iso8601) ,
+      }.to_json)
+    end
     def self.for(item, options={})
       client = options[:alma_client] || AlmaRestClient.client
       alma_response = client.get("/bibs/#{item.mms_id}/holdings/#{item.holding_id}/items/#{item.pid}/booking-availability", query: {period: 9, period_type: 'months'})

@@ -33,3 +33,7 @@ get '/:barcode' do
   options = Options.for(patron: patron, item: item)
   erb :index, locals: {patron: patron, item: item, options: options}
 end
+
+post '/booking' do
+  
+end

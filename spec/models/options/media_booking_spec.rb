@@ -32,5 +32,21 @@ describe Option::MediaBooking do
 
     end
   end
-
+end
+describe Option::MediaBooking, ".book" do
+  it "books a valid item" do
+    barcode = '39015009714562'
+    booking_request_body = {
+      request_type: 'BOOKING',
+      pickup_location_type: 'LIBRARY',
+      pickup_location_library: 'SHAP',
+      booking_start_date: "2021-10-24T15:00:00-04:00",
+      booking_end_date: "2021-10-26T15:00:00-04:00",
+    }.to_json
+    item_req = stub_alma_get_request(url: "items", output: fixture('item.json'), query: {item_barcode: barcode} )
+    booking_req = stub_alma_post_request(url: "users/tutor/requests", input: booking_request_body, query: {item_pid: '23744541730006381'})
+    described_class.book(uniqname: 'tutor', barcode: barcode, booking_date: '2021-10-24', pickup_location: 'SHAP')
+    expect(item_req).to have_been_requested 
+    expect(booking_req).to have_been_requested 
+  end
 end
