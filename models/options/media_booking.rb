@@ -47,8 +47,8 @@ class Option
       [ 
         {code: 'SHAP', display: 'Shapiro Undergraduate Library'},
         {code: 'AAEL', display: 'Art Architecture & Engineering'},
-        {code: 'MUSIC', display: 'Music'},
         {code: 'BURH', display: 'Burh Shelving Facility'},
+        {code: 'MUSIC', display: 'Music'},
         {code: 'TAUB', display: 'Taubman Health Sciences'},
         {code: 'FLINT', display: 'UM-Flint'},
         {code: 'DRBN', display: 'Mardigan Library'},
