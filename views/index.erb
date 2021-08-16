@@ -21,5 +21,6 @@
     <dt>Help</dt><dd><m-chat></m-chat><a href="https://www.lib.umich.edu/ask-librarian">Ask a Librarian</a></dd>
   </dl>
 </aside>
-
-<%= erb :development_options %>
+<% if dev_login? %>
+  <%= erb :development_options %>
+<% end %>

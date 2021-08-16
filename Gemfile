@@ -7,6 +7,8 @@ gem 'sinatra'
 gem 'httparty'
 gem 'thin'
 gem 'activesupport' #in here because of timezone support
+gem 'omniauth'
+gem 'omniauth_openid_connect'
 
 gem 'alma_rest_client',
   git: 'https://github.com/mlibrary/alma_rest_client', 
