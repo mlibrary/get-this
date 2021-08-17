@@ -32,11 +32,13 @@ ENV BUNDLE_WITHOUT development
 #Actually a secret
 ENV ALMA_API_KEY 'YOUR_ALMA_API_KEY'
 ENV WEBLOGIN_SECRET 'weblogin_secret'
+ENV RACK_COOKIE_SECRET 'rack_cookie_secret'
 
 #Not that much of a secret
 ENV ALMA_API_HOST 'https://api-na.hosted.exlibrisgroup.com'
 ENV WEBLOGIN_ID 'weblogin_id'
-
+ENV GET_THIS_BASE_URL='http://localhost:4567'
+ENV APP_ENV 'production'
 
 WORKDIR /app
 
