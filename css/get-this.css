@@ -36,7 +36,6 @@
 }
 
 .get-option .get-this-option-header {
-  cursor: pointer;
   padding: var(--space-large);
   text-decoration: none;
   border-radius: var(--radius-default);
