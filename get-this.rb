@@ -101,5 +101,9 @@ get '/' do
 end
 
 post '/booking' do
+  byebug
+  barcode = ''
+  barcode = URI.parse(request.referrer).path.gsub('/','') if request.referrer
+  Option::MediaBooking.book(uniqname: session[:uniqname], barcode: barcode, booking_date: params[:date], pickup_location: params["pickup-location"])
   
 end

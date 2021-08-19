@@ -41,9 +41,9 @@ class Option
       @data["booking_availability"]&.map do |booking|
         head_time_counter = 0 
         start_date = (Time.zone.parse(booking["from_time"])).to_date
-        end_date = Time.zone.parse(booking["to_time"]).to_date
+        end_date = Time.zone.parse(booking["to_time"]).to_date + num_days_tail_time.days
 
-        while head_time_counter < num_days_head_time
+        while head_time_counter < num_days_head_time + num_days_of_checkout
           start_date = start_date - 1.day
           head_time_counter = head_time_counter + 1 unless @closed_days.closed?(start_date)
         end
@@ -77,8 +77,14 @@ class Option
       unavailable_dates.map{|x| "\"#{x}\""}.join(", ")
     end
     private
-    def num_days_head_time
+    def num_days_of_checkout
       2
+    end
+    def num_days_head_time
+      5
+    end
+    def num_days_tail_time
+      5
     end
   end
 end

@@ -3,9 +3,9 @@
     <h2 class="get-option-title"><%=option.title %></h2><br>
     <p><%=option.subtitle %></p>
   </summary>
-  <form>
-    <label>Pick up location</label>
-    <select style="margin-bottom: var(--space-medium);">
+  <form method="post" action="/booking">
+    <label for="pickup-location">Pick up location</label>
+    <select id="pickup-location" name="pickup-location" style="margin-bottom: var(--space-medium);">
       <% option.pickup_locations.each do |pickup_location| %>
         <option value="<%=pickup_location.code%>"><%=pickup_location.display%></option>
       <% end %>
@@ -24,7 +24,7 @@
   const unavailableDates = [<%= option.unavailable_dates_formatted %>] 
 
   function isDateDisabled(date) {
-    return unavailableDates.includes(date)
+    return unavailableDates.includes(date.toISOString().slice(0,10))
   }
 
   const datePicker = document.querySelector("duet-date-picker")
