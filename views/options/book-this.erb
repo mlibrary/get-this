@@ -21,18 +21,27 @@
 </details>
 
 <script>
-  const unavailableDates = [<%= option.unavailable_dates_formatted %>] 
+  const unavailableDates = [<%= option.unavailable_dates_formatted %>]
+
+  function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
+
+  const today = new Date()
+  const start = addDays(today, 5)
+  const end = new Date(today.setMonth(today.getMonth() + 9))
 
   function isDateDisabled(date) {
-    return unavailableDates.includes(date.toISOString().slice(0,10))
+    const outsideRange = date < start || date > end
+    const unavailable = unavailableDates.includes(date.toISOString().slice(0,10))
+
+    return outsideRange || unavailable
   }
 
   const datePicker = document.querySelector("duet-date-picker")
   datePicker.isDateDisabled = isDateDisabled
-
-  datePicker.addEventListener("duetChange", function(e) {
-    if (isBooked(e.detail.valueAsDate)) {
-      alert(`This item is not available on the date you provided.`)
-    }
-  })
+  datePicker.max = end.toISOString().slice(0,10)
+  datePicker.min = start.toISOString().slice(0,10)
 </script>
