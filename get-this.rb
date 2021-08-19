@@ -4,15 +4,19 @@ require 'byebug'
 require 'active_support/all' 
 require 'omniauth'
 require 'omniauth_openid_connect'
+require "sinatra/flash"
 
 Time.zone = 'Eastern Time (US & Canada)'
 
+
+require_relative "./lib/styled_flash"
 require_relative "./models/patron"
 require_relative "./models/item"
 require_relative "./models/options/media_booking"
 require_relative "./models/options"
 require_relative "./lib/closed_days"
 
+helpers StyledFlash
 enable :sessions
 set :session_secret, ENV['RACK_COOKIE_SECRET'] 
 set server: 'thin', connections: []
@@ -90,11 +94,7 @@ end
 
 get '/:barcode' do
   barcode = params['barcode'] #need to check that this is valid barcode
-  if session[:authenticated] == true
-    patron = Patron.for(session[:uniqname])
-  else
-    patron = Patron::NotInAlma.new
-  end
+  patron = Patron.for(session[:uniqname])
   item = Item.for(barcode)
   options = Options.for(patron: patron, item: item)
   erb :index, locals: {patron: patron, item: item, options: options}
@@ -109,9 +109,17 @@ get '/' do
 end
 
 post '/booking' do
-  byebug
   barcode = ''
   barcode = URI.parse(request.referrer).path.gsub('/','') if request.referrer
-  Option::MediaBooking.book(uniqname: session[:uniqname], barcode: barcode, booking_date: params[:date], pickup_location: params["pickup-location"])
-  
+  response = Option::MediaBooking.book(uniqname: session[:uniqname], barcode: barcode, booking_date: params[:date], pickup_location: params["pickup-location"])
+  if response.code != 200
+    flash[:error] = "ERROR! #{response.body}"
+  else
+    flash[:success] = "SUCCESS! #{response.body}"
+  end
+  redirect "/confirmation"
+end
+
+get '/confirmation' do
+  erb :confirmation, locals: {item: OpenStruct.new(title: 'Confirmation')}
 end
