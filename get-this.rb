@@ -92,6 +92,10 @@ get '/session_switcher' do
 end
 # :nocov:
 
+get '/confirmation' do
+  erb :confirmation, locals: {item: OpenStruct.new(title: 'Confirmation')}
+end
+
 get '/:barcode' do
   barcode = params['barcode'] #need to check that this is valid barcode
   patron = Patron.for(session[:uniqname])
@@ -118,8 +122,4 @@ post '/booking' do
     flash[:success] = "SUCCESS! #{response.body}"
   end
   redirect "/confirmation"
-end
-
-get '/confirmation' do
-  erb :confirmation, locals: {item: OpenStruct.new(title: 'Confirmation')}
 end

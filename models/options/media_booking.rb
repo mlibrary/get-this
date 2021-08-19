@@ -35,7 +35,7 @@ class Option
       'Pick up media at the library'
     end
     def subtitle
-      'Book this item (Expected availability 1-3 days)'
+      'Expected availability 1-3 days'
     end
     def booked_dates
       @data["booking_availability"]&.map do |booking|
