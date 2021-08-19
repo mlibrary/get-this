@@ -68,7 +68,11 @@ before  do
   #authenticated but expired go relogin
   if session[:authenticated] && Time.now.utc > session[:expires_at]
     redirect '/auth/openid_connect'
+  elsif !session[:authenticated]
+    #for now, always authenticate
+    redirect '/auth/openid_connect'
   end
+  
 end
 
 helpers do
@@ -97,7 +101,11 @@ get '/:barcode' do
 end
 
 get '/' do
-  redirect "https://www.lib.umich.edu/find-borrow-request"
+  if dev_login?
+    erb :dev_home, locals: {item: OpenStruct.new(title: 'Get This')}
+  else
+    redirect "https://www.lib.umich.edu/find-borrow-request"
+  end
 end
 
 post '/booking' do
