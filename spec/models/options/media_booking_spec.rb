@@ -9,21 +9,21 @@ describe Option::MediaBooking do
   context "#booked_dates"  do
     it "returns an array of dates that includes head time of 5 days and head checkout time of 2 days" do
       allow(@closed_days).to receive(:closed?).and_return(false)
-      new_booking_days=["2021-10-19","2021-10-20"]
-      head_days = ["2021-10-21","2021-10-22","2021-10-23","2021-10-24","2021-10-25"]
+      new_booking_days=["2021-10-21","2021-10-22"]
+      head_days = ["2021-10-23","2021-10-24","2021-10-25"]
       booking_days = ["2021-10-26","2021-10-27", "2021-10-28"]
-      tail_days = ["2021-10-29","2021-10-30","2021-10-31","2021-11-01","2021-11-02"]
+      tail_days = ["2021-10-29","2021-10-30","2021-10-31"]
       expect(subject.booked_dates).to eq([new_booking_days, head_days, booking_days, tail_days].flatten)
     end
     it "handles closed days in head time of booked items" do
       allow(@closed_days).to receive(:closed?).and_return(false)
       allow(@closed_days).to receive(:closed?).with(Date.parse("2021-10-25")).and_return(true)
       allow(@closed_days).to receive(:closed?).with(Date.parse("2021-10-24")).and_return(true)
-      new_booking_days=["2021-10-17","2021-10-18"]
-      head_days = ["2021-10-19","2021-10-20","2021-10-21","2021-10-22","2021-10-23"]
+      new_booking_days=["2021-10-19","2021-10-20"]
+      head_days = ["2021-10-21","2021-10-22","2021-10-23"]
       holidays = ["2021-10-24", "2021-10-25"]
       booking_days = ["2021-10-26","2021-10-27", "2021-10-28"]
-      tail_days = ["2021-10-29","2021-10-30","2021-10-31","2021-11-01","2021-11-02"]
+      tail_days = ["2021-10-29","2021-10-30","2021-10-31"]
       expect(subject.booked_dates).to eq([new_booking_days, head_days, holidays, booking_days, tail_days].flatten)
     end
     it "returns empty array for not booked item" do
@@ -35,10 +35,10 @@ describe Option::MediaBooking do
 
   context "#unavailable_dates" do
     it "returns booked_dates plus dates when the institution is closed" do
-      new_booking_days=["2021-10-19","2021-10-20"]
-      head_days = ["2021-10-21","2021-10-22","2021-10-23","2021-10-24","2021-10-25"]
+      new_booking_days=["2021-10-21","2021-10-22"]
+      head_days = ["2021-10-23","2021-10-24","2021-10-25"]
       booking_days = ["2021-10-26","2021-10-27", "2021-10-28"]
-      tail_days = ["2021-10-29","2021-10-30","2021-10-31","2021-11-01","2021-11-02"]
+      tail_days = ["2021-10-29","2021-10-30","2021-10-31"]
       booking_unavailable = [new_booking_days,head_days,booking_days,tail_days].flatten
       allow(@closed_days).to receive(:closed?).and_return(false)
       allow(@closed_days).to receive(:closed_days_between).and_return([Date.parse("2021-12-31")])

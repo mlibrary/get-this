@@ -60,7 +60,7 @@ class Option
       [ 
         {code: 'SHAP', display: 'Shapiro Undergraduate Library'},
         {code: 'AAEL', display: 'Art Architecture & Engineering'},
-        {code: 'BURH', display: 'Burh Shelving Facility'},
+        {code: 'BUHR', display: 'Buhr Shelving Facility'},
         {code: 'MUSIC', display: 'Music'},
         {code: 'TAUB', display: 'Taubman Health Sciences'},
         {code: 'FLINT', display: 'UM-Flint'},
@@ -81,10 +81,10 @@ class Option
       2
     end
     def num_days_head_time
-      5
+      3
     end
     def num_days_tail_time
-      5
+      3
     end
   end
 end
