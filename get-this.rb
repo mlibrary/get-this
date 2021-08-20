@@ -118,11 +118,12 @@ post '/booking' do
   response = Option::MediaBooking.book(uniqname: session[:uniqname], barcode: barcode, booking_date: params[:date], pickup_location: params["pickup-location"])
   if response.code != 200
     flash[:error] = "Item was not able to be scheduled for pickup"
+    redirect request.referrer
   else
     data = response.parsed_response
     pickup_date = Time.zone.parse(data["booking_start_date"]).to_date.strftime('%D')
     pickup_location = data["pickup_location"]
     flash[:success] = "Your pickup has been scheduled for #{pickup_date} at #{pickup_location}"
+    redirect "/confirmation"
   end
-  redirect "/confirmation"
 end
