@@ -93,7 +93,7 @@ end
 # :nocov:
 
 get '/confirmation' do
-  erb :confirmation, locals: {item: OpenStruct.new(title: 'Confirmation')}
+  erb :confirmation, locals: {item: OpenStruct.new(title: nil)}
 end
 
 get '/:barcode' do
@@ -106,7 +106,7 @@ end
 
 get '/' do
   if dev_login?
-    erb :dev_home, locals: {item: OpenStruct.new(title: 'Get This')}
+    erb :dev_home, locals: {item: OpenStruct.new(title: nil)}
   else
     redirect "https://www.lib.umich.edu/find-borrow-request"
   end
@@ -121,9 +121,10 @@ post '/booking' do
     redirect request.referrer
   else
     data = response.parsed_response
-    pickup_date = Time.zone.parse(data["booking_start_date"]).to_date.strftime('%D')
+    title = data["title"]
+    pickup_date = Time.zone.parse(data["booking_start_date"]).to_date.strftime('%A, %B %-d, %Y')
     pickup_location = data["pickup_location"]
-    flash[:success] = "Your pickup has been scheduled for #{pickup_date} at #{pickup_location}"
+    flash[:success] = "Your pickup of <strong>#{title}</strong> has been scheduled for <strong>#{pickup_date}</strong> at <strong>#{pickup_location}</strong>"
     redirect "/confirmation"
   end
 end
