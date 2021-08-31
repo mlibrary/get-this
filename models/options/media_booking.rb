@@ -64,7 +64,7 @@ class Option
         {code: 'MUSIC', display: 'Music'},
         {code: 'TAUB', display: 'Taubman Health Sciences'},
         {code: 'FLINT', display: 'UM-Flint'},
-        {code: 'DRBN', display: 'Mardigan Library'},
+        {code: 'DRBN', display: 'Mardigian Library'},
       ].map{|x| OpenStruct.new(code: x[:code], display: x[:display]) }
     end
     def unavailable_dates
