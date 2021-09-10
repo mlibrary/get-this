@@ -6,9 +6,9 @@ on:
       tag:
         description: Release
         required: true
-  workflow_run:
-    workflows: [ 'Build latest from main' ]
-    types: [ completed ]
+  #workflow_run:
+    #workflows: [ 'Build latest from main' ]
+    #types: [ completed ]
 
 env:
   IMAGE_ID: ghcr.io/mlibrary/get-this-unstable
