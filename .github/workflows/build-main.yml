@@ -63,7 +63,7 @@ jobs:
         namespace_token: ${{ secrets.HATCHER_TOKEN }}
         namespace: ${{ secrets.NAMESPACE }}
 
-  deploy-testing:
+  deploy-staging:
     needs: build
     runs-on: ubuntu-latest
     environment: staging
