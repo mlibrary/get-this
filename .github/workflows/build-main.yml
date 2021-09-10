@@ -1,4 +1,4 @@
-name: Build latest from main
+name: Build latest from main and AutoDeploy to Testing and Staging
 
 on:
   workflow_run:
@@ -34,20 +34,6 @@ jobs:
            ghcr.io/mlibrary/${{ secrets.IMAGE_NAME }}:latest
            ghcr.io/mlibrary/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
 
-    #- uses: actions/checkout@v2
-    #- name: Build image
-      #run: docker build -f Dockerfile.prod . --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
-    #- name: Log into registry
-      #run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-    #- name: Push image
-      #run: |
-        #IMAGE_ID=ghcr.io/mlibrary/$IMAGE_NAME
-        ## Change all uppercase to lowercase
-          #IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-          #docker tag $IMAGE_NAME $IMAGE_ID:latest
-          #docker tag $IMAGE_NAME $IMAGE_ID:$GITHUB_SHA
-          #docker push $IMAGE_ID --all-tags
-          
   deploy-testing:
     needs: build
     runs-on: ubuntu-latest
