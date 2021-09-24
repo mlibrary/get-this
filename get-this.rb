@@ -93,7 +93,7 @@ end
 # :nocov:
 
 get '/confirmation' do
-  erb :confirmation, locals: {item: OpenStruct.new(title: 'Confirmation')}
+  erb :confirmation, locals: {item: OpenStruct.new(title: nil)}
 end
 
 get '/:barcode' do
@@ -106,7 +106,7 @@ end
 
 get '/' do
   if dev_login?
-    erb :dev_home, locals: {item: OpenStruct.new(title: 'Get This')}
+    erb :dev_home, locals: {item: OpenStruct.new(title: nil)}
   else
     redirect "https://www.lib.umich.edu/find-borrow-request"
   end
@@ -117,9 +117,14 @@ post '/booking' do
   barcode = URI.parse(request.referrer).path.gsub('/','') if request.referrer
   response = Option::MediaBooking.book(uniqname: session[:uniqname], barcode: barcode, booking_date: params[:date], pickup_location: params["pickup-location"])
   if response.code != 200
-    flash[:error] = "ERROR! #{response.body}"
+    flash[:error] = "Item was not able to be scheduled for pickup"
+    redirect request.referrer
   else
-    flash[:success] = "SUCCESS! #{response.body}"
+    data = response.parsed_response
+    title = data["title"]
+    pickup_date = Time.zone.parse(data["booking_start_date"]).to_date.strftime('%A, %B %-d, %Y')
+    pickup_location = data["pickup_location"]
+    flash[:success] = "Your pickup of <strong>#{title}</strong> has been scheduled for <strong>#{pickup_date}</strong> at <strong>#{pickup_location}</strong>"
+    redirect "/confirmation"
   end
-  redirect "/confirmation"
 end
