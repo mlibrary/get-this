@@ -46,6 +46,13 @@ describe Option::MediaBooking do
 
     end
   end
+  context "pickup_locations" do
+    it "returns a map of pickup locations" do
+      location = subject.pickup_locations.first
+      expect(location.code).not_to be_nil
+      expect(location.display).not_to be_nil
+    end
+  end
 end
 describe Option::MediaBooking, ".book" do
   it "books a valid item" do
