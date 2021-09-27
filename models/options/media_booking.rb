@@ -57,15 +57,9 @@ class Option
       end&.flatten&.sort || []
     end
     def pickup_locations
-      [ 
-        {code: 'SHAP', display: 'Shapiro Undergraduate Library'},
-        {code: 'AAEL', display: 'Art Architecture & Engineering'},
-        {code: 'BUHR', display: 'Buhr Shelving Facility'},
-        {code: 'MUSIC', display: 'Music'},
-        {code: 'TAUB', display: 'Taubman Health Sciences'},
-        {code: 'FLINT', display: 'UM-Flint'},
-        {code: 'DRBN', display: 'Mardigian Library'},
-      ].map{|x| OpenStruct.new(code: x[:code], display: x[:display]) }
+      YAML.load_file('./config/pickup_location_labels.yml').to_a.map do |code, display| 
+          OpenStruct.new(code: code, display: display)
+      end
     end
     def unavailable_dates
       closed = @closed_days.closed_days_between(end_date: Time.zone.today + 9.months).map do |x|
