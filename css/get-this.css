@@ -149,11 +149,11 @@ form {
 duet-date-picker {
   --duet-color-primary: var(--color-teal-400);
   --duet-color-text: var(--color-neutral-400);
-  --duet-color-text-active: var(--color-white-400);
+  --duet-color-text-active: white;
   --duet-color-placeholder: var(--color-neutral-300);
   --duet-color-button: var(--color-teal-100);
   --duet-color-surface: white;
-  --duet-color-overlay: rgba(0, 0, 0, 0.8);
+  --duet-color-overlay: rgba(0, 0, 0, 0);
   --duet-color-border: var(--color-neutral-400);
 
   --duet-font: var(--font-base-family);
@@ -162,4 +162,34 @@ duet-date-picker {
 
   --duet-radius: 4px;
   --duet-z-index: 600;
+}
+
+.duet-date__day:focus,
+.duet-date__select select:focus + .duet-date__select-label,
+.duet-date__next:focus,
+.duet-date__prev:focus {
+  outline: 0;
+  box-shadow: 0 0 0 2px var(--color-maize-400),
+    0 0 0 3px var(--color-neutral-400);
+}
+
+.duet-date__next,
+.duet-date__prev {
+  border-radius: 4px;
+}
+
+.duet-date__day:focus {
+  background: white;
+  color: var(--color-neutral-400);
+}
+
+.duet-date__day.is-outside.is-disabled,
+.duet-date__day[aria-disabled='true'] {
+  background: none;
+  opacity: 1;
+  color: var(--color-neutral-300);
+}
+
+.duet-date__day.is-month:not([aria-disabled='true']):hover {
+  border: solid 1px var(--color-teal-400);
 }
