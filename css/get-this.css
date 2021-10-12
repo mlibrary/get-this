@@ -145,3 +145,21 @@ form {
   border-radius: 4px;
   color: var(--color-green-500);
 }
+
+duet-date-picker {
+  --duet-color-primary: var(--color-teal-400);
+  --duet-color-text: var(--color-neutral-400);
+  --duet-color-text-active: var(--color-white-400);
+  --duet-color-placeholder: var(--color-neutral-300);
+  --duet-color-button: var(--color-teal-100);
+  --duet-color-surface: white;
+  --duet-color-overlay: rgba(0, 0, 0, 0.8);
+  --duet-color-border: var(--color-neutral-400);
+
+  --duet-font: var(--font-base-family);
+  --duet-font-normal: 400;
+  --duet-font-bold: 600;
+
+  --duet-radius: 4px;
+  --duet-z-index: 600;
+}
