@@ -4,15 +4,22 @@
     <p><%=option.subtitle %></p>
   </div>
   <form method="post" action="/booking">
-    <label for="pickup-location">Pickup location</label>
-    <select id="pickup-location" name="pickup-location" style="margin-bottom: var(--space-medium);">
-      <% option.pickup_locations.each do |pickup_location| %>
-        <option value="<%=pickup_location.code%>"><%=pickup_location.display%></option>
-      <% end %>
-    </select>
+    <div class="form-group">
+      <label for="pickup-location">Pickup location</label>
+      <select id="pickup-location" name="pickup-location" style="margin-bottom: var(--space-medium);">
+        <% option.pickup_locations.each do |pickup_location| %>
+          <option value="<%=pickup_location.code%>"><%=pickup_location.display%></option>
+        <% end %>
+      </select>
+    </div>
 
-    <label for="date">Pickup date (YYYY-MM-DD)</label>
-    <duet-date-picker identifier="date"></duet-date-picker>
+    <div class="form-group form-group--error">
+      <label for="date">Pickup date</label>
+      <p style="color: var(--color-neutral-300); margin-top: 0;">Visit or contact the <a href="https://lib.umich.edu/locations-and-hours/askwith-media-library">Askwith Media Library</a> at <a href="askwithmedia@umich.edu">askwithmedia@umich.edu</a> or <a href="tel:734-764-5360">734-764-5360</a> with questions about requesting media items and for information on same day or next day requests and pickup.</p>
+      <p class="error">The date you entered must be in year, month, then day digit format of YYYY-MM-DD</p>
+      <p class="error">The item is unavailable for the date you requested</p>
+      <duet-date-picker identifier="date"></duet-date-picker>
+    </div>
 
     <br>
 
