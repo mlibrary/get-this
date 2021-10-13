@@ -193,3 +193,42 @@ duet-date-picker {
 .duet-date__day.is-month:not([aria-disabled='true']):hover {
   border: solid 1px var(--color-teal-400);
 }
+
+.form-group--error {
+  border: solid 1px var(--color-neutral-100);
+  border-left: solid 4px var(--color-pink-400);
+  padding: var(--space-large);
+  border-radius: 4px;
+}
+
+.form-group--error .error {
+  margin: 0;
+  margin-bottom: var(--space-small);
+  font-weight: bold;
+  color: var(--color-pink-500);
+}
+
+.form-group--error input {
+  border-color: var(--color-pink-400);
+  border-width: 1px;
+}
+
+.error-summary {
+  border: solid 1px var(--color-neutral-100);
+  border-left: solid 4px var(--color-pink-400);
+  padding: var(--space-large);
+  margin-bottom: var(--space-large);
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.error-summary a {
+  font-size: 1rem;
+  color: var(--color-pink-500);
+  margin: 0;
+  border-radius: 4px;
+}
+
+.error-summary p {
+  margin: 0;
+}
