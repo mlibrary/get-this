@@ -6,6 +6,7 @@ ruby '3.0.2'
 gem 'sinatra'
 gem 'httparty'
 gem 'thin'
+gem 'slim'
 gem 'activesupport' #in here because of timezone support
 gem 'omniauth'
 gem 'omniauth_openid_connect'
