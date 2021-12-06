@@ -2,9 +2,11 @@ describe Option::MediaBooking do
   before(:each) do
     @output = JSON.parse(fixture('booking_availability.json'))
     @closed_days = instance_double(ClosedDays)
+    @today = Time.zone.parse("2021-10-01")
+    @initial_unavailable_dates = ["2021-10-01", "2021-10-02"]
   end
   subject do
-    described_class.new(data: @output, closed_days: @closed_days)
+    described_class.new(data: @output, closed_days: @closed_days, today: @today)
   end
   context "#booked_dates"  do
     it "returns an array of dates that includes head time of 5 days and head checkout time of 2 days" do
@@ -42,8 +44,14 @@ describe Option::MediaBooking do
       booking_unavailable = [new_booking_days,head_days,booking_days,tail_days].flatten
       allow(@closed_days).to receive(:closed?).and_return(false)
       allow(@closed_days).to receive(:closed_days_between).and_return([Date.parse("2021-12-31")])
-      expect(subject.unavailable_dates).to eq([booking_unavailable, "2021-12-31"].flatten)
+      expect(subject.unavailable_dates).to eq([@initial_unavailable_dates, booking_unavailable, "2021-12-31"].flatten)
 
+    end
+
+    it "for available item, return only two days in the future as unavailable" do
+      @output = JSON.parse(fixture('empty_booking_availability.json'))
+      allow(@closed_days).to receive(:closed_days_between).and_return([])
+      expect(subject.unavailable_dates).to eq(@initial_unavailable_dates)
     end
   end
   context "pickup_locations" do

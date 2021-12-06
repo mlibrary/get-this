@@ -24,9 +24,10 @@ class Option
       else
       end
     end
-    def initialize(data:, closed_days: ClosedDays.new)
+    def initialize(data:, closed_days: ClosedDays.new, today: Time.zone.today)
       @data = data
       @closed_days = closed_days
+      @today = today
     end
     def type
       'book-this'
@@ -62,13 +63,16 @@ class Option
       end
     end
     def unavailable_dates
-      closed = @closed_days.closed_days_between(end_date: Time.zone.today + 9.months).map do |x|
+      closed = @closed_days.closed_days_between(end_date: @today + 9.months).map do |x|
         x.to_s(:db)
       end
-      [booked_dates, closed].flatten.uniq.sort
+      [initial_unavailable_dates, booked_dates, closed].flatten.uniq.sort
     end
     def unavailable_dates_formatted
       unavailable_dates.map{|x| "\"#{x}\""}.join(", ")
+    end
+    def initial_unavailable_dates
+      [@today, @today+1.day].map{|x| x.to_date.to_s}
     end
     private
     def num_days_of_checkout
