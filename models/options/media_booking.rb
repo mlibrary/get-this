@@ -40,13 +40,21 @@ class Option
     end
     def booked_dates
       @data["booking_availability"]&.map do |booking|
-        head_time_counter = 0 
-        start_date = (Time.zone.parse(booking["from_time"])).to_date
-        end_date = Time.zone.parse(booking["to_time"]).to_date + num_days_tail_time.days
+        start_date = Time.zone.parse(booking["from_time"]).to_date
+        end_date = start_date
 
-        while head_time_counter < num_days_head_time + num_days_of_checkout
+        #calculate end date after booking start time
+        process_time_counter = 0
+        while process_time_counter < num_days_process_time + num_days_of_checkout
+          end_date = end_date + 1.day
+          process_time_counter = process_time_counter + 1 unless @closed_days.closed?(end_date)
+        end
+
+        #calculate start date before booking start time
+        process_time_counter = 0 
+        while process_time_counter < num_days_process_time + num_days_of_checkout
           start_date = start_date - 1.day
-          head_time_counter = head_time_counter + 1 unless @closed_days.closed?(start_date)
+          process_time_counter = process_time_counter + 1 unless @closed_days.closed?(start_date)
         end
 
         dates =  []
@@ -76,13 +84,10 @@ class Option
     end
     private
     def num_days_of_checkout
+      7
+    end
+    def num_days_process_time
       2
-    end
-    def num_days_head_time
-      3
-    end
-    def num_days_tail_time
-      3
     end
   end
 end
