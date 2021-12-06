@@ -20,12 +20,13 @@ class Option
       client = options[:alma_client] || AlmaRestClient.client
       alma_response = client.get("/bibs/#{item.mms_id}/holdings/#{item.holding_id}/items/#{item.pid}/booking-availability", query: {period: 9, period_type: 'months'})
       if alma_response.code == 200
-        self.new(data: alma_response.parsed_response)
+        self.new(booking_data: alma_response.parsed_response, item: item)
       else
       end
     end
-    def initialize(data:, closed_days: ClosedDays.new, today: Time.zone.today)
-      @data = data
+    def initialize(booking_data:, item:, closed_days: ClosedDays.new, today: Time.zone.today)
+      @item = item
+      @data = booking_data
       @closed_days = closed_days
       @today = today
     end
@@ -80,7 +81,13 @@ class Option
       unavailable_dates.map{|x| "\"#{x}\""}.join(", ")
     end
     def initial_unavailable_dates
-      [@today, @today+1.day].map{|x| x.to_date.to_s}
+      due_date = @item.dig("item_data","due_date")
+      if due_date.empty?
+        days = num_days_process_time - 1
+      else
+        days = (Time.zone.parse(due_date).to_date - @today.to_date).to_i + num_days_process_time
+      end
+      (0..days).map{|x| (@today + x.day).to_date.to_s}
     end
     private
     def num_days_of_checkout

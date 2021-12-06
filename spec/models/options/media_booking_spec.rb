@@ -1,12 +1,12 @@
 describe Option::MediaBooking do
   before(:each) do
-    @output = JSON.parse(fixture('booking_availability.json'))
+    @booking_data = JSON.parse(fixture('booking_availability.json'))
     @closed_days = instance_double(ClosedDays)
     @today = Time.zone.parse("2021-10-01")
-    @initial_unavailable_dates = ["2021-10-01", "2021-10-02"]
+    @item = JSON.parse(fixture('item.json'))
   end
   subject do
-    described_class.new(data: @output, closed_days: @closed_days, today: @today)
+    described_class.new(booking_data: @booking_data, item: @item, closed_days: @closed_days, today: @today)
   end
   context "#booked_dates"  do
     it "returns an array of dates that includes head time of 2 days and head checkout time of 7 days" do
@@ -34,25 +34,34 @@ describe Option::MediaBooking do
       expect(subject.booked_dates).to eq([october_unavailable_days, november_unavailable_days].flatten)
     end
     it "returns empty array for not booked item" do
-      @output["booking_availability"] = nil
+      @booking_data["booking_availability"] = nil
       expect(subject.booked_dates).to eq([])
     end
   end
 
   context "#unavailable_dates" do
+    
     it "returns booked_dates plus dates when the institution is closed" do
+      initial_unavailable_dates = ["2021-10-01", "2021-10-02"]
       october_unavailable_days=(17..31).map{|x| "2021-10-#{x}"}
       november_unavailable_days=(1..4).map{|x| "2021-11-0#{x}"}
       allow(@closed_days).to receive(:closed?).and_return(false)
       allow(@closed_days).to receive(:closed_days_between).and_return([Date.parse("2021-12-31")])
-      expect(subject.unavailable_dates).to eq([@initial_unavailable_dates, october_unavailable_days, november_unavailable_days, "2021-12-31"].flatten)
+      expect(subject.unavailable_dates).to eq([initial_unavailable_dates, october_unavailable_days, november_unavailable_days, "2021-12-31"].flatten)
 
     end
 
-    it "for available item, return only two days in the future as unavailable" do
-      @output = JSON.parse(fixture('empty_booking_availability.json'))
+    it "for available item, return only number of processing days from today as unavailable" do
+      @booking_data = JSON.parse(fixture('empty_booking_availability.json'))
       allow(@closed_days).to receive(:closed_days_between).and_return([])
-      expect(subject.unavailable_dates).to eq(@initial_unavailable_dates)
+      expect(subject.unavailable_dates).to eq(["2021-10-01", "2021-10-02"])
+    end
+    it "for checked out item returns due date plus processing date as unavailable" do
+      @booking_data = JSON.parse(fixture('empty_booking_availability.json'))
+      allow(@closed_days).to receive(:closed_days_between).and_return([])
+      @item["item_data"]["due_date"] = "2021-10-02T04:59:00Z"
+      
+      expect(subject.unavailable_dates).to eq(["2021-10-01", "2021-10-02", "2021-10-03", "2021-10-04"])
     end
   end
   context "pickup_locations" do
