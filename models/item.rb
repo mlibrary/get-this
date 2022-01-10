@@ -33,6 +33,9 @@ class Item
   def barcode
     @data.dig("item_data", "barcode")
   end
+  def due_date
+    @data.dig("item_data","due_date")
+  end
   def mms_id
     @data.dig("bib_data","mms_id")
   end

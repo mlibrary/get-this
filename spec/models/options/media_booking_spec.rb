@@ -6,7 +6,7 @@ describe Option::MediaBooking do
     @item = JSON.parse(fixture('item.json'))
   end
   subject do
-    described_class.new(booking_data: @booking_data, item: @item, closed_days: @closed_days, today: @today)
+    described_class.new(booking_data: @booking_data, item: Item.new(data: @item), closed_days: @closed_days, today: @today)
   end
   context "#booked_dates"  do
     it "returns an array of dates that includes head time of 2 days and head checkout time of 7 days" do

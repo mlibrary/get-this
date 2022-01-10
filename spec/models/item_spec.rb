@@ -28,6 +28,11 @@ describe Item do
       expect(subject.barcode).to eq("39015009714562")
     end
   end
+  context "#due_date" do
+    it "returns the duedate" do
+      expect(subject.due_date).to eq("")
+    end
+  end
   context "#mms_id" do
     it "returns the mms_id" do
       expect(subject.mms_id).to eq("990003116350106381")

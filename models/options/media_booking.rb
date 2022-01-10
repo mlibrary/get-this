@@ -100,11 +100,10 @@ class Option
       end.flatten(1).join(", ")
     end
     def initial_unavailable_dates
-      due_date = @item.dig("item_data","due_date")
-      if due_date.empty?
+      if @item.due_date.empty?
         days = num_days_process_time - 1
       else
-        days = (Time.zone.parse(due_date).to_date - @today.to_date).to_i + num_days_process_time
+        days = (Time.zone.parse(@item.due_date).to_date - @today.to_date).to_i + num_days_process_time
       end
       (0..days).map{|x| (@today + x.day).to_date.to_s}
     end
