@@ -92,7 +92,7 @@ describe Option::MediaBooking, ".book" do
       booking_start_date: "2021-10-24T15:00:00-04:00",
       booking_end_date: "2021-10-26T15:00:00-04:00",
     }.to_json
-    item_req = stub_alma_get_request(url: "items", output: fixture('item.json'), query: {item_barcode: barcode} )
+    item_req = stub_alma_get_request(url: "items", output: fixture('item.json'), query: {item_barcode: barcode, expand: "due_date"} )
     booking_req = stub_alma_post_request(url: "users/tutor/requests", input: booking_request_body, query: {item_pid: '23744541730006381'})
     described_class.book(uniqname: 'tutor', barcode: barcode, booking_date: '2021-10-24', pickup_location: 'SHAP')
     expect(item_req).to have_been_requested 

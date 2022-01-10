@@ -4,7 +4,7 @@ class Item
   end
   def self.for(barcode, options={})
     client = options[:alma_client] || AlmaRestClient.client
-    alma_response = client.get("/items", query: {item_barcode: barcode})
+    alma_response = client.get("/items", query: {item_barcode: barcode, expand: "due_date"})
     if alma_response.code == 200
       Item.new(data: alma_response.parsed_response)
     else
@@ -34,7 +34,7 @@ class Item
     @data.dig("item_data", "barcode")
   end
   def due_date
-    @data.dig("item_data","due_date")
+    @data.dig("item_data","due_date") || ""
   end
   def mms_id
     @data.dig("bib_data","mms_id")

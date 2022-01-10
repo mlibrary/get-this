@@ -3,7 +3,7 @@ describe Item do
     @output = JSON.parse(fixture('item.json'))
   end
   subject do
-    stub_alma_get_request(url: "items", output:@output.to_json, query: {item_barcode: '39015009714562'} )
+    stub_alma_get_request(url: "items", output:@output.to_json, query: {item_barcode: '39015009714562', expand: "due_date"} )
     described_class.for('39015009714562')
   end
   context "#title" do
@@ -30,6 +30,11 @@ describe Item do
   end
   context "#due_date" do
     it "returns the duedate" do
+      @output["item_data"]["due_date"] = "2021-10-01T01:00:00Z"
+      expect(subject.due_date).to eq("2021-10-01T01:00:00Z")
+    end
+    it "returns empty string for nil due date" do
+      @output["item_data"].delete("due_date")
       expect(subject.due_date).to eq("")
     end
   end
