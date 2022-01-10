@@ -38,6 +38,17 @@ describe Option::MediaBooking do
       expect(subject.booked_dates).to eq([])
     end
   end
+  context "#unavailable_dates_text" do
+    it "returns string of dates in desired format" do
+      initial_unavailable_dates = ["2021-10-01", "2021-10-02"]
+      october_unavailable_days=(17..31).map{|x| "2021-10-#{x}"}
+      november_unavailable_days=(1..4).map{|x| "2021-11-0#{x}"}
+      allow(@closed_days).to receive(:closed?).and_return(false)
+      allow(@closed_days).to receive(:closed_days_between).and_return([Date.parse("2021-12-31"), Date.parse("2022-01-01")])
+      expect(subject.unavailable_dates_text).to eq("Oct 1 - 2, 2021, Oct 17 - 31, 2021, Nov 1 - 4, 2021, Dec 31, 2021, Jan 1, 2022")
+    end
+    
+  end
 
   context "#unavailable_dates" do
     
@@ -48,7 +59,6 @@ describe Option::MediaBooking do
       allow(@closed_days).to receive(:closed?).and_return(false)
       allow(@closed_days).to receive(:closed_days_between).and_return([Date.parse("2021-12-31")])
       expect(subject.unavailable_dates).to eq([initial_unavailable_dates, october_unavailable_days, november_unavailable_days, "2021-12-31"].flatten)
-
     end
 
     it "for available item, return only number of processing days from today as unavailable" do

@@ -80,6 +80,25 @@ class Option
     def unavailable_dates_formatted
       unavailable_dates.map{|x| "\"#{x}\""}.join(", ")
     end
+    def unavailable_dates_text
+      dates = unavailable_dates.map{|x| Date.parse(x)}
+      by_month = dates.chunk{|x| x.month}
+      ranges = by_month.map do |m, day|
+        day.chunk_while do |a, b| 
+          b.mday == a.mday + 1
+        end
+      end.flatten(1)
+
+      ranges.map do |big_r|
+        big_r.map do |r|
+          if r.size == 1
+            r.first.strftime("%b %-d, %Y")
+          else
+            r.first.strftime("%b %-d") + " - " + r.last.strftime("%-d, %Y")
+          end
+        end
+      end.flatten(1).join(", ")
+    end
     def initial_unavailable_dates
       due_date = @item.dig("item_data","due_date")
       if due_date.empty?
