@@ -47,6 +47,13 @@ describe Option::MediaBooking do
       allow(@closed_days).to receive(:closed_days_between).and_return([Date.parse("2021-12-31"), Date.parse("2022-01-01")])
       expect(subject.unavailable_dates_text).to eq("Oct 1 - 2, 2021, Oct 17 - 31, 2021, Nov 1 - 4, 2021, Dec 31, 2021, Jan 1, 2022")
     end
+
+    it "does not display unavailable days in the past" do
+      @booking_data["booking_availability"][0]["from_time"] = "2021-10-01T16:07:00Z"
+      allow(@closed_days).to receive(:closed?).and_return(false)
+      allow(@closed_days).to receive(:closed_days_between).and_return([])
+      expect(subject.unavailable_dates_text).to eq("Oct 1 - 10, 2021")
+    end
     
   end
 

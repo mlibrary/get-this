@@ -81,7 +81,7 @@ class Option
       unavailable_dates.map{|x| "\"#{x}\""}.join(", ")
     end
     def unavailable_dates_text
-      dates = unavailable_dates.map{|x| Date.parse(x)}
+      dates = unavailable_dates.filter_map{|x| Date.parse(x) if Date.parse(x) >= @today.to_date}
       by_month = dates.chunk{|x| x.month}
       ranges = by_month.map do |m, day|
         day.chunk_while do |a, b| 
