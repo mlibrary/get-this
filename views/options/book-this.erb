@@ -12,6 +12,7 @@
     </select>
 
     <label for="date">Pickup date (YYYY-MM-DD)</label>
+    <!== This item is unavailable on the following dates: <%=option.unavailable_dates_text%> !>
     <duet-date-picker identifier="date"></duet-date-picker>
 
     <br>
@@ -30,7 +31,7 @@
   }
 
   const today = new Date()
-  const start = addDays(today, 5)
+  const start = addDays(today)
   const end = new Date(today.setMonth(today.getMonth() + 9))
 
   function isDateDisabled(date) {

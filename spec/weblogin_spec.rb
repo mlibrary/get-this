@@ -9,7 +9,7 @@ describe "requests" do
     }
     env 'rack.session', @session
   end
-  let(:stub_item){ stub_alma_get_request(url: "items", output: fixture('item.json'), query: {item_barcode: 'somebarcode'} )}
+  let(:stub_item){ stub_alma_get_request(url: "items", output: fixture('item.json'), query: {item_barcode: 'somebarcode', expand: 'due_date'} )}
   let(:stub_patron){ stub_alma_get_request(url: "users/tutor", output: fixture('mrio_user_alma.json') )}
   context "/login" do
     it "sendings off to omniauth; session has correct redirect path" do
