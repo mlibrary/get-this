@@ -90,19 +90,32 @@ describe Option::MediaBooking do
   end
 end
 describe Option::MediaBooking, ".book" do
-  it "books a valid item" do
-    barcode = '39015009714562'
-    booking_request_body = {
+  before(:each) do
+    @today = Time.zone.parse("2021-10-01")
+    @item = JSON.parse(fixture('item.json'))
+    @barcode = '39015009714562'
+    @booking_request_body = {
       request_type: 'BOOKING',
       pickup_location_type: 'LIBRARY',
       pickup_location_library: 'SHAP',
       booking_start_date: "2021-10-24T15:00:00-04:00",
       booking_end_date: "2021-10-26T15:00:00-04:00",
-    }.to_json
-    item_req = stub_alma_get_request(url: "items", output: fixture('item.json'), query: {item_barcode: barcode, expand: "due_date"} )
-    booking_req = stub_alma_post_request(url: "users/tutor/requests", input: booking_request_body, query: {item_pid: '23744541730006381'})
-    described_class.book(uniqname: 'tutor', barcode: barcode, booking_date: '2021-10-24', pickup_location: 'SHAP')
-    expect(item_req).to have_been_requested 
+    }
+    @item_req = stub_alma_get_request(url: "items", output: @item.to_json, query: {item_barcode: @barcode, expand: "due_date"} )
+    booking_url = "bibs/#{@item["bib_data"]["mms_id"]}/holdings/#{@item["holding_data"]["holding_id"]}/items/#{@item["item_data"]["pid"]}/booking-availability"
+    booking_get_request = stub_alma_get_request(url: booking_url, query: {period: 9, period_type: 'months'}, output: { booking_availability: nil }.to_json)
+  end
+  it "books a valid item" do
+    booking_req = stub_alma_post_request(url: "users/tutor/requests", input: @booking_request_body.to_json, query: {item_pid: '23744541730006381'})
+    described_class.book(uniqname: 'tutor', barcode: @barcode, booking_date: '2021-10-24', pickup_location: 'SHAP', today: @today)
+    expect(@item_req).to have_been_requested 
     expect(booking_req).to have_been_requested 
+  end
+  it "does not book an item for a closed day" do
+    @booking_request_body[:booking_start_date] = "2021-10-01T15:00:00-04:00" 
+    @booking_request_body[:booking_end_date] = "2021-10-03T15:00:00-04:00" 
+    booking_req = stub_alma_post_request(url: "users/tutor/requests", input: @booking_request_body.to_json, query: {item_pid: '23744541730006381'})
+    expect{described_class.book(uniqname: 'tutor', barcode: @barcode, booking_date: '2021-10-01', pickup_location: 'SHAP', today: @today)}.to raise_error(StandardError)
+    expect(booking_req).not_to have_been_requested
   end
 end

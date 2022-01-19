@@ -118,7 +118,11 @@ end
 post '/booking' do
   barcode = ''
   barcode = URI.parse(request.referrer).path.gsub('/','') if request.referrer
-  response = Option::MediaBooking.book(uniqname: session[:uniqname], barcode: barcode, booking_date: params[:date], pickup_location: params["pickup-location"])
+  begin 
+    response = Option::MediaBooking.book(uniqname: session[:uniqname], barcode: barcode, booking_date: params[:date], pickup_location: params["pickup-location"])
+  rescue
+    response = OpenStruct.new(code: 500)
+  end
   if response.code != 200
     flash[:error] = "Item was not able to be scheduled for pickup"
     redirect request.referrer

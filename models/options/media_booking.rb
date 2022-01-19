@@ -3,10 +3,12 @@ class Option
     def self.match?(patron:, item:)
       patron.can_book? && item.bookable?
     end
-    def self.book(uniqname:, barcode:, booking_date:, pickup_location:, client: AlmaRestClient.client, item: Item.for(barcode)) 
-     
+    def self.book(uniqname:, barcode:, booking_date:, pickup_location:, client: AlmaRestClient.client, item: Item.for(barcode), today: Time.zone.today) 
       #3:00 pm because if a library is open at all it is open at 3
       start_date = Time.zone.parse("#{booking_date} 3:00pm")
+
+      unavailable_dates = self.for(item, {today: today}).unavailable_dates
+      raise StandardError if unavailable_dates.any?{|x| Date.parse(x) == start_date.to_date}
       #TBD error out if EmptyItem
       client.post("/users/#{uniqname}/requests", query: {item_pid: item.pid}, body: {
         request_type: 'BOOKING',
@@ -18,9 +20,10 @@ class Option
     end
     def self.for(item, options={})
       client = options[:alma_client] || AlmaRestClient.client
+      today = options[:today] || Time.zone.today
       alma_response = client.get("/bibs/#{item.mms_id}/holdings/#{item.holding_id}/items/#{item.pid}/booking-availability", query: {period: 9, period_type: 'months'})
       if alma_response.code == 200
-        self.new(booking_data: alma_response.parsed_response, item: item)
+        self.new(booking_data: alma_response.parsed_response, item: item, today: today)
       else
       end
     end
