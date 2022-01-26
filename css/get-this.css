@@ -8,6 +8,10 @@
     grid-template-columns: 2fr minmax(240px, 1fr);
     gap: 0 var(--space-xxx-large);
   }
+
+  .get-option .get-this-option-header {
+    height: 100%;
+  }
 }
 
 .strong {
@@ -47,7 +51,6 @@
   padding: var(--space-large);
   text-decoration: none;
   border-radius: var(--radius-default);
-  height: 100%;
 }
 
 .get-option .get-this-option-header + * {
@@ -62,14 +65,6 @@
 .get-option .get-this-option-header > * {
   display: inline;
 }
-
-/*
-.get-option .get-this-option-header:hover .get-option-title {
-  text-decoration-thickness: 2px;
-  text-decoration: underline;
-  text-decoration-color: var(--color-teal-400);
-}
-*/
 
 .get-url {
   text-decoration: none;
