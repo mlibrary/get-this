@@ -22,9 +22,7 @@
 </section>
 
 <script>
-  const unavailableDates = [<%= option.unavailable_dates_formatted %>];
-
-  function addDays(date, days = 0) {
+  const addDays = (date, days = 0) => {
     const result = new Date(date);
     result.setDate(result.getDate() + days);
     return result;
@@ -33,16 +31,20 @@
   const today = new Date();
   const start = addDays(today);
   const end = new Date(today.setMonth(today.getMonth() + 9));
+  const unavailableDates = [<%= option.unavailable_dates_formatted %>];
 
-  function isDateDisabled(date) {
+  const changeFormat = (date) => {
+    return date.toISOString().slice(0,10);
+  }
+
+  const isDateDisabled = (date) => {
     const outsideRange = date < start || date > end;
-    const unavailable = unavailableDates.includes(date.toISOString().slice(0,10));
-
+    const unavailable = unavailableDates.includes(changeFormat(date));
     return outsideRange || unavailable;
   }
 
   const datePicker = document.querySelector('duet-date-picker');
   datePicker.isDateDisabled = isDateDisabled;
-  datePicker.max = end.toISOString().slice(0,10);
-  datePicker.min = start.toISOString().slice(0,10);
+  datePicker.max = changeFormat(end);
+  datePicker.min = changeFormat(start);
 </script>
