@@ -54,7 +54,13 @@ describe Option::MediaBooking do
       allow(@closed_days).to receive(:closed_days_between).and_return([])
       expect(subject.unavailable_dates_text).to eq("Oct 1 - 10, 2021")
     end
-    
+   
+     it "displays initial_unavailable_dates when no other days are uavailable" do
+      @booking_data["booking_availability"] = nil
+      allow(@closed_days).to receive(:closed?).and_return(false)
+      allow(@closed_days).to receive(:closed_days_between).and_return([])
+      expect(subject.unavailable_dates_text).to eq("Oct 1 - 2, 2021")
+    end
   end
 
   context "#unavailable_dates" do

@@ -12,7 +12,7 @@
     </select>
 
     <label for="date">Pickup date (YYYY-MM-DD)</label>
-    <% if option.unavailable_dates %>
+    <% if !option.unavailable_dates.empty? %>
       <div class="message message--warning">
         <span class="strong">Item availability:</span> This item is unavailable on the upcoming dates: <%=option.unavailable_dates_text%>
       </div>
