@@ -1,4 +1,73 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/**
+ * skip-links.css
+ * 
+ * Skip Links provides an accessible list that can navigate
+ * keyboard users directly to certain areas of the site.
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - Container
+ * 2.0 - List
+ * 3.0 - Anchors
+ */
+
+
+
+/***********************/
+/*** 1.0 - Container ***/
+/***********************/
+
+.site-skip-links {
+  background: var(--color-blue-400);
+}
+
+.site-skip-links:not(:focus-within) {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+
+
+/******************/
+/*** 2.0 - List ***/
+/******************/
+
+.site-skip-links ul {
+  margin: var(--space-medium) 0;
+  text-align: center;
+  list-style: none;
+}
+
+.site-skip-links ul li + li {
+  margin-top: var(--space-medium);
+}
+
+
+
+/*********************/
+/*** 3.0 - Anchors ***/
+/*********************/
+
+.site-skip-links a {
+  color: white;
+  padding: var(--space-x-small);
+}
+
+
 .get-this-layout {
+  flex-grow: 1;
+  margin-bottom: var(--space-x-large);
+  margin-top: var(--space-x-large);
   padding-bottom: var(--viewport-margin);
 }
 
@@ -12,6 +81,10 @@
   .get-option .get-this-option-header {
     height: 100%;
   }
+}
+
+h1 {
+  margin-top: 0;
 }
 
 .strong {
@@ -219,4 +292,61 @@ duet-date-picker {
 
 .duet-date__day.is-month:not([aria-disabled='true']):hover {
   border: solid 1px var(--color-teal-400);
+}
+
+/**
+ * footer.css
+ * 
+ * Footer contains extra navigation links and copyright information.
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - Container
+ * 2.0 - Content
+ * 3.0 - Disclaimer
+ */
+
+
+
+/***********************/
+/*** 1.0 - Container ***/
+/***********************/
+
+.page-footer {
+  text-align: center;
+}
+
+.page-footer__content,
+.page-footer__disclaimer span {
+  display: block;
+}
+
+
+
+/***********************/
+/*** 2.0 - Content ***/
+/***********************/
+
+@media only screen and (min-width: 720px) {
+  .page-footer__content nav ul {
+    margin: 0 -1rem;
+  }
+  
+  .page-footer__content nav li {
+    display: inline-block;
+    padding: 0 1rem;
+  }
+}
+
+
+
+/************************/
+/*** 3.0 - Disclaimer ***/
+/************************/
+
+@media only screen and (min-width: 720px) {
+  .page-footer__disclaimer span {
+    display: initial;
+  }
 }
