@@ -4,11 +4,14 @@
 
   <form method="post" action="/booking">
     <label for="pickup-location">Pickup location</label>
-    <select id="pickup-location" name="pickup-location" autocomplete="off">
-      <% option.pickup_locations.each do |pickup_location| %>
-        <option value="<%=pickup_location.code%>"><%=pickup_location.display%></option>
-      <% end %>
-    </select>
+    <div class="dropdown">
+      <select id="pickup-location" name="pickup-location" autocomplete="off">
+        <% option.pickup_locations.each do |pickup_location| %>
+          <option value="<%=pickup_location.code%>"><%=pickup_location.display%></option>
+        <% end %>
+      </select>
+      <%= erb :"components/dropdown_icon" %> 
+    </div>
 
     <label for="date">Pickup date (YYYY-MM-DD)</label>
     <% if !option.unavailable_dates.empty? %>
