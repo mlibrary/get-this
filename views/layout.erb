@@ -36,6 +36,9 @@
     <main class="viewport-container get-this-layout">
       <%= my_styled_flash %>
       <%= yield %>
+      <% if dev_login? %>
+        <%= erb :development_options %>
+      <% end %>
     </main>
 
     <footer class="page-footer">

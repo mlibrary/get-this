@@ -1,5 +1,5 @@
 <h1 id="maincontent" tabindex="-1">
-  <a href="<%=item.catalog_url%>" class="get-url"><%=item.title%></a><br>
+  <a href="<%=item.catalog_url%>" class="get-url"><%=item.title%></a>
   <span class="subtle-heading">Select how to get this item</span>
 </h1>
 
@@ -22,6 +22,3 @@
 
   <a href=<%=item.catalog_url%>>View item record</a>
 </aside>
-<% if dev_login? %>
-  <%= erb :development_options %>
-<% end %>

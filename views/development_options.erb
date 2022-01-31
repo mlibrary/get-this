@@ -1,19 +1,20 @@
-  <% test_users = [
+<%
+  test_users = [
     {
       label: "Faculty (many)",
-      value: 'mlibrary.acct.testing1@gmail.com'
+      value: "mlibrary.acct.testing1@gmail.com"
     },
     {
-      label: 'Graduate student (few)',
-      value: 'mlibrary.acct.testing2@gmail.com'
+      label: "Graduate student (few)",
+      value: "mlibrary.acct.testing2@gmail.com"
     },
     {
       label: "New student (none)",
-      value: 'mlibrary.acct.testing3@gmail.com'
+      value: "mlibrary.acct.testing3@gmail.com"
     },
     {
-      label: 'Not in Alma',
-      value: 'definitelynotinalma'
+      label: "Not in Alma",
+      value: "definitelynotinalma"
     },
   ]
 
@@ -24,34 +25,29 @@
     }
   ]
 %>
-  <div class="message-callout">
-    <div class="prose owl">
-      <h2 style="margin-top: 0;">Design &amp; Development Options</h2>
-  
-      <form method="get" action="/session_switcher" class="prose owl">
-        <label for="test-user">
-          <p>Active user account:</p>
-        </label>
-  
-        <input type="text" list="users" id="test-user" name="uniqname" autocomplete="on" value="<%=session[:uniqname] || "" %>">
-        <datalist id="users">
-          <% test_users.each do |user| %>
-            <option value="<%=user[:value]%>"><%=user[:label]%></option>
-            <% end %>
-        </datalist>
+<m-callout subtle>
+  <h2>Design &amp; Development Options</h2>
 
-        <div>
-        <label for="item">
-          <p>Item:</p>
-        </label>
-        <select id="item" name="barcode" autocomplete="on">
-          <% items.each do |item| %>
-            <option value="<%=item[:value]%>"<% if params[:barcode] == item[:value]%>selected<%end%>><%=item[:label]%></option>
-            <% end %>
-        </select>
-        </div>
-        
-        <button class="button-most-important" style="margin-top: var(--space-small);">Save</button>
-      </form>
-    </div>
-  </div>
+  <form method="get" action="/session_switcher" class="prose owl">
+    <label for="test-user">
+      Active user account:
+    </label>
+    <input type="text" list="users" id="test-user" name="uniqname" autocomplete="on" value="<%=session[:uniqname] || "" %>">
+    <select id="users" autocomplete="off" aria-label="Select user type">
+      <% test_users.each do |user| %>
+        <option value="<%=user[:value]%>"><%=user[:label]%></option>
+      <% end %>
+    </select>
+
+    <label for="item">
+      Item:
+    </label>
+    <select id="item" name="barcode" autocomplete="off">
+      <% items.each do |item| %>
+        <option value="<%=item[:value]%>"<% if params[:barcode] == item[:value]%>selected<%end%>><%=item[:label]%></option>
+        <% end %>
+    </select>
+    
+    <button class="button-most-important">Save</button>
+  </form>
+</m-callout>
