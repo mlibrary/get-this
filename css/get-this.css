@@ -167,6 +167,7 @@ input[type='text'] {
 
 .dropdown svg {
   fill: var(--color-teal-400);
+  pointer-events: none;
   position: absolute;
   right: 0.5em;
   top: 50%;
