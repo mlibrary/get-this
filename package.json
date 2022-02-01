@@ -20,6 +20,7 @@
   "devDependencies": {
     "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",
-    "postcss-import": "^14.0.2"
+    "postcss-import": "^14.0.2",
+    "postcss-minify": "^1.1.0"
   }
 }

@@ -1,3 +1,9 @@
 @import url("styles/base.css");
+@import url("styles/typography.css");
+@import url("styles/anchors.css");
 @import url("styles/skip-links.css");
+@import url("styles/forms.css");
+@import url("styles/messages.css");
+@import url("styles/get-option.css");
+@import url("styles/sidebar.css");
 @import url("styles/footer.css");

@@ -1,0 +1,48 @@
+/**
+ * messages.css
+ * 
+ * Messages are small text areas that alert users
+ * about important information
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - Message
+ *   1.1 - States
+ *   1.2 - Content
+ */
+
+
+
+/*********************/
+/*** 1.0 - Message ***/
+/*********************/
+
+.message {
+  background: var(--color-teal-100);
+  border-bottom: 1px solid var(--color-teal-400);
+  padding: var(--space-small) var(--space-medium);
+}
+
+/*** 1.1 - States ***/
+
+.message--success {
+  background: var(--color-green-100);
+  border-bottom: 1px solid var(--color-green-400);
+}
+
+.message--warning {
+  background: var(--color-maize-100);
+  border-bottom: 1px solid var(--color-maize-400);
+}
+
+.message--critical {
+  background: var(--color-pink-100);
+  border-bottom: 1px solid var(--color-pink-400);
+}
+
+/*** 1.2 - Content ***/
+
+.message > p {
+  margin: 0;
+}

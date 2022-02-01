@@ -1,0 +1,39 @@
+/**
+ * sidebar.css
+ * 
+ * Sidebar contains the elements within
+ * the `aside` element.
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - Container
+ * 2.0 - Content
+ */
+
+
+
+/***********************/
+/*** 1.0 - Container ***/
+/***********************/
+
+aside {
+  grid-area: sidebar;
+  position: sticky;
+  top: var(--space-x-large);
+}
+
+
+
+/*********************/
+/*** 2.0 - Content ***/
+/*********************/
+
+aside > dl.record {
+  grid-template-columns: minmax(max-content, auto) 1fr;
+  width: 100%;
+}
+
+aside > dl.record > dt {
+  padding-right: var(--space-x-large);
+}

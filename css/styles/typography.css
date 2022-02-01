@@ -1,0 +1,43 @@
+/**
+ * typography.css
+ * 
+ * Typography defines the styling of text elements.
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - Headings
+ * 2.0 - Heading Variants
+ * 3.0 - Font Weights
+ */
+
+
+
+/**********************/
+/*** 1.0 - Headings ***/
+/**********************/
+
+h1 {
+  grid-area: title;
+  margin: 0;
+}
+
+
+
+/******************************/
+/*** 2.0 - Heading Variants ***/
+/******************************/
+
+.subtle-heading {
+  display: block;
+}
+
+
+
+/**************************/
+/*** 3.0 - Font Weights ***/
+/**************************/
+
+.strong {
+  font-weight: var(--semibold);
+}
