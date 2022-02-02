@@ -50,6 +50,7 @@ main > * + * {
     gap: 0 var(--space-xxx-large);
     grid-template-areas:
       "title title"
+      "flash flash"
       "content sidebar"
       "dev-options .";
     grid-template-columns: 2fr minmax(240px, 1fr);

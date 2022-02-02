@@ -18,10 +18,15 @@
 /*** 1.0 - Message ***/
 /*********************/
 
-.message {
+.message,
+.message--info {
   background: var(--color-teal-100);
   border-bottom: 1px solid var(--color-teal-400);
   padding: var(--space-small) var(--space-medium);
+}
+
+#maincontent + .message {
+  grid-area: flash;
 }
 
 /*** 1.1 - States ***/
