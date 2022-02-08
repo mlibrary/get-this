@@ -1,0 +1,133 @@
+/**
+ * forms.css
+ * 
+ * Forms allow users to submit information and receive feedback.
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - Container
+ * 2.0 - Labels
+ * 3.0 - Inputs
+ *   3.1 - Dropdown
+ *   3.2 - Duet Date Picker
+ */
+
+
+
+/***********************/
+/*** 1.0 - Container ***/
+/***********************/
+
+form,
+form > * {
+  margin: 0;
+}
+
+form > * + * {
+  display: block;
+  margin-top: var(--space-small);
+}
+
+
+
+/********************/
+/*** 2.0 - Labels ***/
+/********************/
+
+label {
+  display: block;
+  font-weight: var(--semibold);
+}
+
+
+
+/********************/
+/*** 3.0 - Inputs ***/
+/********************/
+
+input,
+select {
+  all: unset;
+  border: solid 1px var(--color-neutral-400);
+  border-radius: var(--radius-default);
+  box-shadow: inset 0 1px var(--space-xxx-small) rgba(0, 0, 0, 0.1);
+  font-family: inherit;
+  font-size: 1rem;
+  padding: var(--space-small);
+}
+
+input {
+  width: 100%;
+}
+
+/*** 3.1 - Dropdown ***/
+
+.dropdown {
+  display: block;
+  position: relative;
+  width: fit-content;
+  width: -moz-fit-content;
+}
+
+.dropdown > select {
+  cursor: pointer;
+  padding-right: var(--space-xx-large);
+}
+
+.dropdown > svg {
+  fill: var(--color-teal-400);
+  pointer-events: none;
+  position: absolute;
+  right: var(--space-x-small);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/*** 3.2 - Duet Date Picker ***/
+
+duet-date-picker {
+  --duet-color-border: var(--color-neutral-400);
+  --duet-color-button: var(--color-teal-100);
+  --duet-color-overlay: rgba(0, 0, 0, 0);
+  --duet-color-placeholder: var(--color-neutral-300);
+  --duet-color-primary: var(--color-teal-400);
+  --duet-color-surface: white;
+  --duet-color-text: var(--color-neutral-400);
+  --duet-color-text-active: white;
+  --duet-font: var(--font-base-family);
+  --duet-font-bold: 600;
+  --duet-font-normal: 400;
+  --duet-radius: 4px;
+  --duet-z-index: 600;
+}
+
+.duet-date__day:focus,
+.duet-date__select select:focus + .duet-date__select-label,
+.duet-date__next:focus,
+.duet-date__prev:focus {
+  box-shadow: 0 0 0 2px var(--color-maize-400),
+    0 0 0 3px var(--color-neutral-400);
+  outline: 0;
+}
+
+.duet-date__next,
+.duet-date__prev {
+  border-radius: 4px;
+}
+
+.duet-date__day:focus {
+  background: white;
+  color: var(--color-neutral-400);
+}
+
+.duet-date__day.is-outside.is-disabled,
+.duet-date__day[aria-disabled='true'] {
+  background: none;
+  color: var(--color-neutral-300);
+  opacity: 1;
+}
+
+.duet-date__day.is-month:not([aria-disabled='true']):hover {
+  border: solid 1px var(--color-teal-400);
+}

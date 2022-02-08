@@ -1,0 +1,27 @@
+/**
+ * anchors.css
+ * 
+ * Anchors are pieces of text which marks the beginning and/or
+ * the end of a hypertext link.
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - Heading
+ */
+
+
+
+/*********************/
+/*** 1.0 - Heading ***/
+/*********************/
+
+h1 a {
+  color: inherit;
+  text-decoration-color: var(--color-teal-400);
+  text-underline-offset: var(--space-xx-small);
+}
+
+h1 a:not(:hover) {
+  text-decoration: none;
+}

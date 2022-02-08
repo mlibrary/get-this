@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -16,15 +17,62 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/themes/default.css" />
   </head>
   <body>
+    <section aria-label="Skip links" class="site-skip-links">
+      <div class="viewport-container">
+        <ul>
+          <li>
+            <a href="#maincontent">Skip to main content</a>
+          </li>
+          <li>
+            <a href="#chat">Skip to Ask a Librarian chat</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
     <m-universal-header></m-universal-header>
     <m-website-header name="Get This" to="https://search.lib.umich.edu/everything"></m-website-header>
-    
-    <div class="viewport-container" role=>
-      <%= my_styled_flash %>
-    </div>
-    
-    <main class="viewport-container get-this-layout">
+
+    <main class="viewport-container container">
       <%= yield %>
     </main>
+
+    <footer class="page-footer">
+      <div class="page-footer__content">
+        <div class="viewport-container">
+          <nav class="footer-nav" aria-label="Footer">
+            <ul>
+              <li>
+                <a href="https://search.lib.umich.edu/">Home</a>
+              </li>
+              <li>
+                <a href="https://search.lib.umich.edu/accessibility">Accessibility</a>
+              </li>
+              <li>
+                <a href="https://guides.lib.umich.edu/c.php?g=914690">Tips for using Library Search</a>
+              </li>
+              <li>
+                <a href="https://lib.umich.edu/research-and-scholarship/help-research/how-we-can-help">Get research help</a>
+              </li>
+              <li>
+                <a href="https://search.lib.umich.edu/technical-overview">Technical overview</a>
+              </li>
+              <li>
+                <a href="https://ill.lib.umich.edu/">Make an <abbr title="Inter Library Loan">I.L.L.</abbr> Request</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="page-footer__disclaimer">
+        <div class="viewport-container">
+          <span>&copy; <%= Date.today.year %>, Regents of the University of Michigan.</span>
+          <span>For details and exceptions, see the <a href="https://lib.umich.edu/about-us/policies/copyright-policy">Copyright&nbsp;Policy</a>.</span>
+        </div>
+      </div>
+    </footer>
+    <m-chat>
+      <div id="chat" tabindex="-1"></div>
+    </m-chat>
   </body>
 </html>

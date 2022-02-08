@@ -1,21 +1,14 @@
-<section class="get-option" open>
-  <div class="get-this-option-header">
-    <h2 class="get-option-title"><%=option.title %></h2><br>
-    <p><%=option.subtitle %></p>
-  </div>
+<section class="get-option container">
+  <h2><%=option.title %></h2>
+  <p><%=option.subtitle %></p>
+
   <form method="post" action="/booking">
     <label for="pickup-location">Pickup location</label>
-    <select id="pickup-location" name="pickup-location" style="margin-bottom: var(--space-medium);">
-      <% option.pickup_locations.each do |pickup_location| %>
-        <option value="<%=pickup_location.code%>"><%=pickup_location.display%></option>
-      <% end %>
-    </select>
+    <%= erb :"components/dropdown", :locals => { id: "pickup-location", options: option.pickup_locations, value: "code", label: "display" } %>
 
     <label for="date">Pickup date (YYYY-MM-DD)</label>
     <% if !option.unavailable_dates.empty? %>
-      <div class="message message--warning">
-        <span class="strong">Item availability:</span> This item is unavailable on the upcoming dates: <%=option.unavailable_dates_text%>
-      </div>
+      <%= erb :'components/message', :locals => { message: '<span class="strong">Item availability:</span> This item is unavailable on the upcoming dates: ' + option.unavailable_dates_text, kind: 'warning' } %>
     <% end %>
     <duet-date-picker identifier="date"></duet-date-picker>
 
