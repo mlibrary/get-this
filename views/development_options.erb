@@ -33,26 +33,12 @@
       Active user account:
     </label>
     <input type="text" list="users" id="test-user" name="uniqname" autocomplete="on" value="<%=session[:uniqname] || "" %>">
-    <div class="dropdown">
-      <select id="users" autocomplete="off" aria-label="Select user type">
-        <% test_users.each do |user| %>
-          <option value="<%=user[:value]%>"><%=user[:label]%></option>
-        <% end %>
-      </select>
-      <%= erb :"components/dropdown_icon" %> 
-    </div>
+    <%= erb :"components/dropdown", :locals => { id: "users", options: test_users.as_json, value: "value", label: "label", aria_label: "Select user type" } %>
 
     <label for="item">
       Item:
     </label>
-    <div class="dropdown">
-      <select id="item" name="barcode" autocomplete="off">
-        <% items.each do |item| %>
-          <option value="<%=item[:value]%>"<% if params[:barcode] == item[:value]%>selected<%end%>><%=item[:label]%></option>
-        <% end %>
-      </select>
-      <%= erb :"components/dropdown_icon" %> 
-    </div>
+    <%= erb :"components/dropdown", :locals => { id: "item", options: items.as_json, value: "value", label: "label", selected: params[:barcode] } %>
     
     <button class="button-most-important">Save</button>
   </form>
