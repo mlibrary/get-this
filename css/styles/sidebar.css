@@ -9,6 +9,8 @@
  * -----------------
  * 1.0 - Container
  * 2.0 - Content
+ *   2.1 - Item Details
+ *   2.2 - Service Info
  */
 
 
@@ -23,17 +25,50 @@ aside {
   top: var(--space-x-large);
 }
 
+aside > * + * {
+  margin-top: var(--space-x-large);
+}
+
 
 
 /*********************/
 /*** 2.0 - Content ***/
 /*********************/
 
-aside > dl.record {
+aside .subtle-heading,
+aside .subtle-heading + h3 {
+  margin-bottom: 0;
+}
+
+aside .subtle-heading + * {
+  margin-top: 0;
+}
+
+/*** 2.1 - Item Details ***/
+
+aside dl.record {
   grid-template-columns: minmax(max-content, auto) 1fr;
   width: 100%;
 }
 
-aside > dl.record > dt {
+aside dl.record > dt {
   padding-right: var(--space-x-large);
+}
+
+/*** 2.2 - Service Info ***/
+
+aside ul.contact {
+  list-style: none;
+  padding: 0;
+}
+
+aside ul.contact li {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-x-small);
+}
+
+aside ul.contact li + li {
+  margin-top: var(--space-medium);
 }

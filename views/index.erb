@@ -8,21 +8,44 @@
 <% options.each do |option| %>
   <% if option.type == "book-this" %>
     <%= erb :"options/book-this", locals: {option: option} %> 
-  <%else %>
+  <% else %>
     "Not available." 
-  <%end %>
+  <% end %>
 <% end %>
 
-<aside class="container">
-  <h2 class="subtle-heading">Item details</h2>
-  <dl class="record">
-    <dt>Title</dt><dd><%=item.title%></dd>
-    <!--<dt>Location</dt><dd><%=item.library%></a></dd>-->
-    <dt>Call number</dt><dd><%=item.call_number%></dd>
-    <dt>Barcode</dt><dd><%=item.barcode%></dd>
-  </dl>
+<aside>
+  <section class="container">
+    <h2 class="subtle-heading">Item Details</h2>
+    <dl class="record">
+      <dt>Title</dt><dd><%=item.title%></dd>
+      <!--<dt>Location</dt><dd><%=item.library%></a></dd>-->
+      <dt>Call number</dt><dd><%=item.call_number%></dd>
+      <dt>Barcode</dt><dd><%=item.barcode%></dd>
+    </dl>
+    <a href=<%=item.catalog_url%>>View item record</a>
+  </section>
 
-  <a href=<%=item.catalog_url%>>View item record</a>
+  <section class="container">
+    <h2 class="subtle-heading">Service Info</h2>
+    <h3>Askwith Media Library</h3>
+    <a href="https://www.lib.umich.edu/locations-and-hours/askwith-media-library">Link to location page</a>
+    <ul class="contact">
+      <li>
+        <svg xmlns="http://www.w3.org/2000/svg" focusable="false" width="16" height="16" fill="var(--color-teal-400)" viewBox="0 0 24 24">
+          <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+        </svg>
+        <span>Phone:</span>
+        <a href="tel:734-764-5360">734-764-5360</a>
+      </li>
+      <li>
+        <svg xmlns="http://www.w3.org/2000/svg" focusable="false" width="16" height="16" fill="var(--color-teal-400)" viewBox="0 0 24 24">
+          <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+        <span>Email:</span>
+        <a href="mailto:askwithmedia@umich.edu">askwithmedia@umich.edu</a>
+      </li>
+    </ul>
+  </section>
 </aside>
 
 <% if dev_login? %>
