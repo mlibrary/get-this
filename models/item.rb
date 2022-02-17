@@ -18,6 +18,16 @@ class Item
   def library
     @data.dig("item_data", "library", "desc")
   end
+  def location
+    @data.dig("item_data", "location", "desc")
+  end
+  def shelving_location
+    item_location = library
+    if location != "NONE"
+      item_location += " #{location}"
+    end
+    item_location
+  end
   def library_code
     @data.dig("item_data", "library", "value")
   end

@@ -18,6 +18,18 @@ describe Item do
     end
   end
 
+  context "#location" do
+    it "returns location within the library" do
+      expect(subject.location).to eq("NONE")
+    end
+  end
+
+  context "#shelving_location" do
+    it "returns shelving location" do
+      expect(subject.shelving_location).to eq("Music")
+    end
+  end
+
   context "#call_number" do
     it "returns the call number" do
       expect(subject.call_number).to eq("ML760 .P18")

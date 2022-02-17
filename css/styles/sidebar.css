@@ -47,7 +47,7 @@ aside .subtle-heading + * {
 /*** 2.1 - Item Details ***/
 
 aside dl.record {
-  grid-template-columns: minmax(max-content, auto) 1fr;
+  grid-template-columns: minmax(min-content, max-content) auto;
   width: 100%;
 }
 

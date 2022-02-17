@@ -17,10 +17,14 @@
   <section class="container">
     <h2 class="subtle-heading">Item Details</h2>
     <dl class="record">
-      <dt>Title</dt><dd><%=item.title%></dd>
-      <!--<dt>Location</dt><dd><%=item.library%></a></dd>-->
-      <dt>Call number</dt><dd><%=item.call_number%></dd>
-      <dt>Barcode</dt><dd><%=item.barcode%></dd>
+      <dt>Title</dt>
+      <dd><%=item.title%></dd>
+      <dt>Shelving location</dt>
+      <dd><%=item.shelving_location%></dd>
+      <dt>Call number</dt>
+      <dd><%=item.call_number%></dd>
+      <dt>Barcode</dt>
+      <dd><%=item.barcode%></dd>
     </dl>
     <a href=<%=item.catalog_url%>>View item record</a>
   </section>
