@@ -46,6 +46,7 @@ main > * + * {
 @media (min-width: 1000px) {
   main {
     align-content: start;
+    align-items: flex-start;
     display: grid;
     gap: 0 var(--space-xxx-large);
     grid-template-areas:
