@@ -72,3 +72,9 @@ aside ul.contact li {
 aside ul.contact li + li {
   margin-top: var(--space-medium);
 }
+
+aside ul.contact li svg {
+  fill: var(--color-teal-400);
+  height: auto;
+  width: 1em;
+}
