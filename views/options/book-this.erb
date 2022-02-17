@@ -7,6 +7,7 @@
     <%= erb :"components/dropdown", :locals => { id: "pickup-location", options: option.pickup_locations, value: "code", label: "display" } %>
 
     <label for="date">Pickup date (YYYY-MM-DD)</label>
+    <small>Contact Askwith Media Library at askwithmedia@umich.edu or 734-764-5360 if you have questions or want to pick up an item in fewer than three days. Loans are typically for 7 days.</small>
     <% if !option.unavailable_dates.empty? %>
       <%= erb :'components/message', :locals => { message: '<span class="strong">Item availability:</span> This item is unavailable on the upcoming dates: ' + option.unavailable_dates_text, kind: 'warning' } %>
     <% end %>

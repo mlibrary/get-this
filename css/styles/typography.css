@@ -9,6 +9,7 @@
  * 1.0 - Headings
  * 2.0 - Heading Variants
  * 3.0 - Font Weights
+ * 4.0 - Font Sizes
  */
 
 
@@ -40,4 +41,15 @@ h1 {
 
 .strong {
   font-weight: var(--semibold);
+}
+
+
+
+/**************************/
+/*** 4.0 - Font Sizes ***/
+/**************************/
+
+small {
+  color: var(--color-blue-300);
+  font-size: 0.875rem;
 }
