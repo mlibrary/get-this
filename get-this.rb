@@ -124,7 +124,7 @@ post '/booking' do
     response = OpenStruct.new(code: 500)
   end
   if response.code != 200
-    flash[:error] = "Item was not able to be scheduled for pickup"
+    flash[:critical] = "Item was not able to be scheduled for pickup"
     redirect request.referrer
   else
     data = response.parsed_response
