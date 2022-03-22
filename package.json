@@ -18,9 +18,9 @@
   },
   "homepage": "https://github.com/mlibrary/get-this#readme",
   "devDependencies": {
-    "cssnano": "^5.0.16",
-    "postcss": "^8.3.6",
-    "postcss-cli": "^8.3.1",
+    "cssnano": "^5.1.5",
+    "postcss": "^8.4.12",
+    "postcss-cli": "^9.1.0",
     "postcss-import": "^14.0.2"
   }
 }
