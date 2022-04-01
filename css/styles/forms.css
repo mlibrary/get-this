@@ -96,24 +96,37 @@ duet-date-picker {
   --duet-color-text: var(--color-neutral-400);
   --duet-color-text-active: white;
   --duet-font: var(--font-base-family);
-  --duet-font-bold: 600;
+  --duet-font-bold: var(--semibold);
   --duet-font-normal: 400;
-  --duet-radius: 4px;
+  --duet-radius: var(--radius-default);
   --duet-z-index: 600;
+}
+
+.duet-date__day {
+  font-weight: var(--duet-font-bold);
+}
+
+.duet-date__day.is-outside.is-disabled,
+.duet-date__day[aria-disabled='true'] {
+  background: none;
+  color: var(--color-neutral-300);
+  font-weight: var(--duet-font-normal);
+  opacity: 1;
+  text-decoration: line-through;
+  text-decoration-color: var(--color-neutral-200);
+}
+
+.duet-date__day.is-month:not([aria-disabled='true']):hover {
+  border: solid 1px var(--color-teal-400);
 }
 
 .duet-date__day:focus,
 .duet-date__select select:focus + .duet-date__select-label,
 .duet-date__next:focus,
 .duet-date__prev:focus {
-  box-shadow: 0 0 0 2px var(--color-maize-400),
+  box-shadow: 0 0 0 var(--space-xxx-small) var(--color-maize-400),
     0 0 0 3px var(--color-neutral-400);
   outline: 0;
-}
-
-.duet-date__next,
-.duet-date__prev {
-  border-radius: 4px;
 }
 
 .duet-date__day:focus {
@@ -121,13 +134,7 @@ duet-date-picker {
   color: var(--color-neutral-400);
 }
 
-.duet-date__day.is-outside.is-disabled,
-.duet-date__day[aria-disabled='true'] {
-  background: none;
-  color: var(--color-neutral-300);
-  opacity: 1;
-}
-
-.duet-date__day.is-month:not([aria-disabled='true']):hover {
-  border: solid 1px var(--color-teal-400);
+.duet-date__next,
+.duet-date__prev {
+  border-radius: var(--duet-radius);
 }
