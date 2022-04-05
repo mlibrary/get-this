@@ -21,7 +21,7 @@ require_relative "./lib/closed_days"
 helpers StyledFlash
 enable :sessions
 set :session_secret, ENV["RACK_COOKIE_SECRET"]
-set server: "thin", connections: []
+set server: "puma", connections: []
 
 use OmniAuth::Builder do
   provider :openid_connect, {
