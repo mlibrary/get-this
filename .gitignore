@@ -8,6 +8,7 @@ public/bundles/
 .npm/
 .config/
 .irb_history
+.cache/
 
 # environment variables
 .env
