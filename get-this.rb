@@ -87,9 +87,9 @@ helpers do
 end
 
 # :nocov:
-get "/session_switcher" do
+post "/session_switcher" do
   session[:uniqname] = params[:uniqname]
-  redirect "/#{params[:barcode]}"
+  redirect "/#{params[:item]}"
 end
 # :nocov:
 
@@ -117,11 +117,13 @@ post "/booking" do
   barcode = ""
   barcode = URI.parse(request.referrer).path.delete("/") if request.referrer
   begin
+    logger.info "Requesting barcode: #{barcode}; for pickup on #{params[:date]}; for pickup at #{params["pickup-location"]}"
     response = Option::MediaBooking.book(uniqname: session[:uniqname], barcode: barcode, booking_date: params[:date], pickup_location: params["pickup-location"])
   rescue
-    response = OpenStruct.new(code: 500)
+    response = OpenStruct.new(code: 500, parsed_response: "rejected before sent to Alma")
   end
   if response.code != 200
+    logger.error response.parsed_response
     flash[:critical] = "Item was not able to be scheduled for pickup"
     redirect request.referrer
   else
@@ -129,6 +131,7 @@ post "/booking" do
     title = data["title"]
     pickup_date = Time.zone.parse(data["booking_start_date"]).to_date.strftime("%A, %B %-d, %Y")
     pickup_location = data["pickup_location"]
+    logger.info "Barcode: #{data["barcode"]}; Title: #{title}; Booked for #{pickup_date}; for pickup at #{pickup_location}"
     flash[:success] = "Your pickup of <strong>#{title}</strong> has been scheduled for <strong>#{pickup_date}</strong> at <strong>#{pickup_location}</strong>"
     redirect "/confirmation"
   end

@@ -26,9 +26,9 @@ class Item
   end
 
   def shelving_location
-    item_location = library
+    item_location = library || ""
     if location != "NONE"
-      item_location += " #{location}"
+      item_location << " #{location}"
     end
     item_location
   end

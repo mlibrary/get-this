@@ -28,18 +28,21 @@
 <m-callout subtle style="grid-area: dev-options">
   <h2>Design &amp; Development Options</h2>
 
-  <form method="get" action="/session_switcher" class="prose">
+  <form method="post" action="/session_switcher" class="prose">
     <label for="test-user">
       Active user account:
     </label>
-    <input type="text" list="users" id="test-user" name="uniqname" autocomplete="on" value="<%=session[:uniqname] || "" %>">
-    <%= erb :"components/dropdown", :locals => { id: "users", options: test_users.as_json, value: "value", label: "label", aria_label: "Select user type" } %>
-
+    <input type="text" list="users" id="test-user" name="uniqname" autocomplete="off" value="<%=session[:uniqname] || "" %>">
+    <datalist id="users" style="display:none">
+      <% test_users.each do |user| %>
+        <option value="<%=user[:value]%>"><%=user[:value]%></option>
+      <% end %>
+    </datalist>
     <label for="item">
       Item:
     </label>
     <%= erb :"components/dropdown", :locals => { id: "item", options: items.as_json, value: "value", label: "label", selected: params[:barcode] } %>
-    
+
     <button class="button-most-important">Save</button>
   </form>
 </m-callout>
