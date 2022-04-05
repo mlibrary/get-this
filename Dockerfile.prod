@@ -27,7 +27,7 @@ COPY --chown=${UID}:${GID} . /app
 USER $UNAME
 
 ENV BUNDLE_PATH /gems
-ENV BUNDLE_WITHOUT development
+ENV BUNDLE_WITHOUT development:test
 
 WORKDIR /app
 
