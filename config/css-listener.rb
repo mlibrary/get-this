@@ -1,5 +1,4 @@
 require "listen"
-require "byebug"
 
 listener = Listen.to("css") do |modified, added, removed|
   puts(modified: modified, added: added, removed: removed)

@@ -1,5 +1,4 @@
 require "json"
-require "byebug"
 require "date"
 class ClosedDays
   def initialize(data = File.read("./config/institution_hours_exceptions.json"))
