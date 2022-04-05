@@ -1,6 +1,6 @@
 require 'sinatra'
 require "alma_rest_client"
-require 'byebug'
+require 'byebug' if development?
 require 'active_support/all' 
 require 'omniauth'
 require 'omniauth_openid_connect'

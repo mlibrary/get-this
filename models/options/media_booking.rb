@@ -14,8 +14,8 @@ class Option
         request_type: 'BOOKING',
         pickup_location_type: 'LIBRARY',
         pickup_location_library: pickup_location,
-        booking_start_date: start_date.to_s(:iso8601),
-        booking_end_date: (start_date + 2.days).to_s(:iso8601) ,
+        booking_start_date: start_date.to_fs(:iso8601),
+        booking_end_date: (start_date + 2.days).to_fs(:iso8601) ,
       }.to_json)
     end
     def self.for(item, options={})
@@ -63,7 +63,7 @@ class Option
 
         dates =  []
         while start_date <= end_date
-          dates.push(start_date.to_s(:db)) 
+          dates.push(start_date.to_fs(:db)) 
           start_date = start_date + 1.day
         end
         dates
@@ -76,7 +76,7 @@ class Option
     end
     def unavailable_dates
       closed = @closed_days.closed_days_between(end_date: @today + 9.months).map do |x|
-        x.to_s(:db)
+        x.to_fs(:db)
       end
       [initial_unavailable_dates, booked_dates, closed].flatten.uniq.sort
     end
