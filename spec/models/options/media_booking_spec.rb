@@ -40,9 +40,6 @@ describe Option::MediaBooking do
   end
   context "#unavailable_dates_text" do
     it "returns string of dates in desired format" do
-      initial_unavailable_dates = ["2021-10-01", "2021-10-02"]
-      october_unavailable_days = (17..31).map { |x| "2021-10-#{x}" }
-      november_unavailable_days = (1..4).map { |x| "2021-11-0#{x}" }
       allow(@closed_days).to receive(:closed?).and_return(false)
       allow(@closed_days).to receive(:closed_days_between).and_return([Date.parse("2021-12-31"), Date.parse("2022-01-01")])
       expect(subject.unavailable_dates_text).to eq("Oct 1 - 2, 2021, Oct 17 - 31, 2021, Nov 1 - 4, 2021, Dec 31, 2021, Jan 1, 2022")
@@ -108,7 +105,7 @@ describe Option::MediaBooking, ".book" do
     }
     @item_req = stub_alma_get_request(url: "items", output: @item.to_json, query: {item_barcode: @barcode, expand: "due_date"})
     booking_url = "bibs/#{@item["bib_data"]["mms_id"]}/holdings/#{@item["holding_data"]["holding_id"]}/items/#{@item["item_data"]["pid"]}/booking-availability"
-    booking_get_request = stub_alma_get_request(url: booking_url, query: {period: 9, period_type: "months"}, output: {booking_availability: nil}.to_json)
+    stub_alma_get_request(url: booking_url, query: {period: 9, period_type: "months"}, output: {booking_availability: nil}.to_json)
   end
   it "books a valid item" do
     booking_req = stub_alma_post_request(url: "users/tutor/requests", input: @booking_request_body.to_json, query: {item_pid: "23744541730006381"})
