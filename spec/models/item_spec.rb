@@ -1,10 +1,10 @@
 describe Item do
   before(:each) do
-    @output = JSON.parse(fixture('item.json'))
+    @output = JSON.parse(fixture("item.json"))
   end
   subject do
-    stub_alma_get_request(url: "items", output:@output.to_json, query: {item_barcode: '39015009714562', expand: "due_date"} )
-    described_class.for('39015009714562')
+    stub_alma_get_request(url: "items", output: @output.to_json, query: {item_barcode: "39015009714562", expand: "due_date"})
+    described_class.for("39015009714562")
   end
   context "#title" do
     it "returns string" do
@@ -75,20 +75,19 @@ describe Item do
       expect(subject.bookable?).to eq(false)
     end
     it "returns true if item is in FVL and isn't Loan 8 or Loan 9" do
-      #@output["item_data"]["policy"]["value"]
-      @output["item_data"]["library"]["value"] = 'FVL'
+      # @output["item_data"]["policy"]["value"]
+      @output["item_data"]["library"]["value"] = "FVL"
       expect(subject.bookable?).to eq(true)
     end
     it "returns false if FVL and loan 8" do
-      @output["item_data"]["policy"]["value"] = '08'
-      @output["item_data"]["library"]["value"] = 'FVL'
+      @output["item_data"]["policy"]["value"] = "08"
+      @output["item_data"]["library"]["value"] = "FVL"
       expect(subject.bookable?).to eq(false)
     end
     it "returns false if FVL and loan 9" do
-      @output["item_data"]["policy"]["value"] = '09'
-      @output["item_data"]["library"]["value"] = 'FVL'
+      @output["item_data"]["policy"]["value"] = "09"
+      @output["item_data"]["library"]["value"] = "FVL"
       expect(subject.bookable?).to eq(false)
     end
   end
-
 end

@@ -1,5 +1,5 @@
 <div class="dropdown">
-  <select <% if defined?(id) %>id="<%= id %>"<% end %> autocomplete="off" <% if defined?(aria_label) %>aria-label="<%= aria_label %>"<% end %>>
+  <select <% if defined?(id) %>id="<%= id %>"<% end %> name="<%= id %>" autocomplete="off" <% if defined?(aria_label) %>aria-label="<%= aria_label %>"<% end %>>
     <% options.each do |option| %>
       <option value="<%= option[value] %>" <% if defined?(selected) && selected == option[value] %>selected<% end %>><%= option[label] %></option>
     <% end %>

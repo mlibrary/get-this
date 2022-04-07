@@ -1,8 +1,8 @@
 describe ClosedDays do
   before(:each) do
-    @data = JSON.parse(fixture('hours_exceptions.json'))
+    @data = JSON.parse(fixture("hours_exceptions.json"))
   end
-  let(:closed) {Date.parse("2021-12-31")}
+  let(:closed) { Date.parse("2021-12-31") }
   subject do
     described_class.new(@data.to_json)
   end
@@ -20,14 +20,12 @@ describe ClosedDays do
     end
   end
   context "closed_days_between(start_date:today,end_date:)" do
-    let(:start) { Date.parse('2021-12-01') } 
+    let(:start) { Date.parse("2021-12-01") }
     it "returns array of closed days between start and end days" do
-      expect(subject.closed_days_between(start_date:  start, end_date: closed)).to eq([closed])
+      expect(subject.closed_days_between(start_date: start, end_date: closed)).to eq([closed])
     end
     it "returns empty array if there are no closed days" do
-      expect(subject.closed_days_between(start_date:  start, end_date: closed - 1.day)).to eq([])
+      expect(subject.closed_days_between(start_date: start, end_date: closed - 1.day)).to eq([])
     end
   end
-  
-
 end
