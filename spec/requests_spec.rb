@@ -15,4 +15,10 @@ describe "requests" do
       expect(last_response.location).to eq("https://www.lib.umich.edu/find-borrow-request")
     end
   end
+  context "/confirmation" do
+    it "works" do
+      get "/confirmation"
+      expect(last_response.body).to include("Go to")
+    end
+  end
 end

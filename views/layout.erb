@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <title>Get This <% if item&.title %> "<%= item.title %>" <% end %>| University of Michigan Library</title>
+    <title>Get This <% if defined?(item) %> "<%= item.title %>" <% end %>| University of Michigan Library</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
     <link href="https://unpkg.com/@umich-lib/web@1/umich-lib.css" rel="stylesheet"/>

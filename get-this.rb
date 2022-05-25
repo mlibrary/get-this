@@ -1,4 +1,5 @@
 require "sinatra"
+require "sinatra/reloader" if development?
 require "alma_rest_client"
 require "byebug" if development?
 require "active_support/all"
@@ -58,7 +59,7 @@ get "/logout" do
 end
 
 get "/login" do
-  erb :login, locals: {has_js: true, item: OpenStruct.new(title: nil)}
+  erb :login, locals: {has_js: true}
 end
 
 before do
@@ -90,7 +91,7 @@ end
 # :nocov:
 
 get "/confirmation" do
-  erb :confirmation, locals: {item: OpenStruct.new(title: nil)}
+  erb :confirmation
 end
 
 get "/:barcode" do
@@ -103,7 +104,7 @@ end
 
 get "/" do
   if dev_login?
-    erb :dev_home, locals: {item: OpenStruct.new(title: nil)}
+    erb :dev_home
   else
     redirect "https://www.lib.umich.edu/find-borrow-request"
   end
