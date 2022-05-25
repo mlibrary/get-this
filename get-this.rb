@@ -58,7 +58,7 @@ get "/logout" do
 end
 
 get "/login" do
-  erb :"login", locals: {has_js: true, item: OpenStruct.new(title: nil)}
+  erb :login, locals: {has_js: true, item: OpenStruct.new(title: nil)}
 end
 
 before do
