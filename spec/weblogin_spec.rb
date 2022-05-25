@@ -12,14 +12,13 @@ describe "requests" do
   let(:stub_item) { stub_alma_get_request(url: "items", output: fixture("item.json"), query: {item_barcode: "somebarcode", expand: "due_date"}) }
   let(:stub_patron) { stub_alma_get_request(url: "users/tutor", output: fixture("mrio_user_alma.json")) }
   context "/login" do
-    it "sendings off to omniauth; session has correct redirect path" do
+    it "sends off to omniauth; session has correct redirect path" do
       stub_item
       @session[:authenticated] = false
       env "rack.session", @session
       get "/somebarcode"
-      get "/login"
       expect(last_request.env["rack.session"][:path_before_login]).to eq("/somebarcode")
-      expect(URI.parse(last_response.location).path).to eq("/auth/openid_connect")
+      expect(URI.parse(last_response.location).path).to eq("/login")
     end
   end
   context "authenticated but expired" do
@@ -29,7 +28,7 @@ describe "requests" do
       env "rack.session", @session
       get "/somebarcode"
       expect(last_request.env["rack.session"][:path_before_login]).to eq("/somebarcode")
-      expect(URI.parse(last_response.location).path).to eq("/auth/openid_connect")
+      expect(URI.parse(last_response.location).path).to eq("/login")
     end
   end
   context "not authenticated" do

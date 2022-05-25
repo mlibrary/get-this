@@ -12,6 +12,7 @@ require_relative "./lib/monkey_httpclient"
 Time.zone = "Eastern Time (US & Canada)"
 
 require_relative "./lib/styled_flash"
+require_relative "./lib/utility"
 require_relative "./models/patron"
 require_relative "./models/item"
 require_relative "./models/options/media_booking"
@@ -57,7 +58,7 @@ get "/logout" do
 end
 
 get "/login" do
-  redirect "/auth/openid_connect"
+  erb :"login", locals: {has_js: true, item: OpenStruct.new(title: nil)}
 end
 
 before do
@@ -69,14 +70,9 @@ before do
     pass
   end
 
-  session[:path_before_login] = request.path_info
-
-  # authenticated but expired go relogin
-  if session[:authenticated] && Time.now.utc > session[:expires_at]
-    redirect "/auth/openid_connect"
-  elsif !session[:authenticated]
-    # for now, always authenticate
-    redirect "/auth/openid_connect"
+  if !session[:authenticated] || Time.now.utc > session[:expires_at]
+    session[:path_before_login] = request.path_info
+    redirect "/login"
   end
 end
 
