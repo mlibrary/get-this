@@ -7,8 +7,8 @@ class Patron
     client = options[:alma_client] || AlmaRestClient.client
 
     alma_response = client.get("/users/#{uniqname}")
-    if alma_response.code == 200
-      Patron.new(data: alma_response.parsed_response)
+    if alma_response.status == 200
+      Patron.new(data: alma_response.body)
     else
       NotInAlma.new
     end

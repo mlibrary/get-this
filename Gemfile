@@ -11,7 +11,7 @@ gem "sinatra-flash"
 
 gem "alma_rest_client",
   git: "https://github.com/mlibrary/alma_rest_client",
-  tag: "1.3.1"
+  branch: "move-to-faraday"
 
 # In order to get rspec to work for ruby 3.1. Maybe later see if it's still necessary
 gem "net-smtp", require: false
