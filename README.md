@@ -32,31 +32,31 @@ ACCOUNT_URL='https://account.lib.umich.edu'
 ```
 
 build container
-
 ```
 docker-compose build
 ```
 
 bundle install
-
 ```
 docker-compose run --rm web bundle install
 ```
 
 npm install
-
 ```
 docker-compose run --rm web npm install
 ```
 
 build css
-
 ```
 docker-compose run --rm web npm run build
 ```
 
-start containers
+copy over the css
+```
+cp js/* public/bundles/
+```
 
+start containers
 ```
 docker-compose up -d
 ```
