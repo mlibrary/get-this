@@ -20,5 +20,12 @@ services:
       - gem_cache:/gems
     command: bundle exec ruby ./config/css-listener.rb
 
+  js:
+    build: .
+    volumes:
+      - .:/app
+      - gem_cache:/gems
+    command: bundle exec ruby ./config/js-listener.rb
+
 volumes:
   gem_cache:

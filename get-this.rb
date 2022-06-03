@@ -1,4 +1,5 @@
 require "sinatra"
+require "sinatra/reloader" if development?
 require "alma_rest_client"
 require "byebug" if development?
 require "active_support/all"
@@ -12,6 +13,7 @@ require_relative "./lib/monkey_httpclient"
 Time.zone = "Eastern Time (US & Canada)"
 
 require_relative "./lib/styled_flash"
+require_relative "./lib/utility"
 require_relative "./models/patron"
 require_relative "./models/item"
 require_relative "./models/options/media_booking"
@@ -57,7 +59,7 @@ get "/logout" do
 end
 
 get "/login" do
-  redirect "/auth/openid_connect"
+  erb :login, locals: {has_js: true}
 end
 
 before do
@@ -69,14 +71,9 @@ before do
     pass
   end
 
-  session[:path_before_login] = request.path_info
-
-  # authenticated but expired go relogin
-  if session[:authenticated] && Time.now.utc > session[:expires_at]
-    redirect "/auth/openid_connect"
-  elsif !session[:authenticated]
-    # for now, always authenticate
-    redirect "/auth/openid_connect"
+  if !session[:authenticated] || Time.now.utc > session[:expires_at]
+    session[:path_before_login] = request.path_info
+    redirect "/login"
   end
 end
 
@@ -94,7 +91,7 @@ end
 # :nocov:
 
 get "/confirmation" do
-  erb :confirmation, locals: {item: OpenStruct.new(title: nil)}
+  erb :confirmation
 end
 
 get "/:barcode" do
@@ -107,7 +104,7 @@ end
 
 get "/" do
   if dev_login?
-    erb :dev_home, locals: {item: OpenStruct.new(title: nil)}
+    erb :dev_home
   else
     redirect "https://www.lib.umich.edu/find-borrow-request"
   end

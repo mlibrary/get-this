@@ -5,8 +5,8 @@ gem "sinatra"
 gem "httparty"
 gem "puma"
 gem "activesupport" # in here because of timezone support
-gem "omniauth", "~>1.9"
-gem "omniauth_openid_connect", "~>0.3.5"
+gem "omniauth"
+gem "omniauth_openid_connect"
 gem "sinatra-flash"
 
 gem "alma_rest_client",
