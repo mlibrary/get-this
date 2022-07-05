@@ -64,7 +64,7 @@ end
 
 before do
   Time.zone = "Eastern Time (US & Canada)"
-  pass if ["auth", "session_switcher", "logout", "login"].include? request.path_info.split("/")[1]
+  pass if ["auth", "session_switcher", "logout", "login", "-"].include? request.path_info.split("/")[1]
 
   if dev_login?
     session[:uniqname] = "mlibrary.acct.testing1@gmail.com" unless session[:uniqname]
@@ -132,4 +132,7 @@ post "/booking" do
     flash[:success] = "Your pickup of <strong>#{title}</strong> has been scheduled for <strong>#{pickup_date}</strong> at <strong>#{pickup_location}</strong>"
     redirect "/confirmation"
   end
+end
+get "/-/live" do
+  200
 end
