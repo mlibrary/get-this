@@ -25,7 +25,7 @@ describe "requests" do
     it "works even for a not-logged-in user" do
       @session[:authenticated] = false
       env "rack.session", @session
-      get "/-/live" 
+      get "/-/live"
       expect(last_response.status).to eq(200)
     end
   end
