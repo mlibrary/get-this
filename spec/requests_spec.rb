@@ -21,4 +21,12 @@ describe "requests" do
       expect(last_response.body).to include("Go to")
     end
   end
+  context "/-/live" do
+    it "works even for a not-logged-in user" do
+      @session[:authenticated] = false
+      env "rack.session", @session
+      get "/-/live"
+      expect(last_response.status).to eq(200)
+    end
+  end
 end

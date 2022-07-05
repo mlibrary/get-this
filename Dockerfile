@@ -25,12 +25,8 @@ RUN groupadd -g ${GID} -o ${UNAME}
 RUN useradd -m -d /app -u ${UID} -g ${GID} -o -s /bin/bash ${UNAME}
 RUN mkdir -p /gems && chown ${UID}:${GID} /gems
 
-
-COPY --chown=${UID}:${GID} Gemfile* /app/
 USER $UNAME
 
 ENV BUNDLE_PATH /gems
 
 WORKDIR /app
-
-CMD ["bundle", "exec", "ruby", "get-this.rb", "-o", "0.0.0.0"]

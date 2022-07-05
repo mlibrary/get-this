@@ -5,13 +5,21 @@ services:
     build: .
     ports:
       - "4567:4567"
+      - "9394:9394"
     volumes:
       - .:/app
       - gem_cache:/gems
     env_file:
       - .env
       - .env-dev-values
-    command: bundle exec ruby get-this.rb  -o 0.0.0.0
+    command:
+      - bundle 
+      - exec 
+      - rackup 
+      - -p
+      - "4567"
+      - --host
+      - 0.0.0.0
 
   css:
     build: .
