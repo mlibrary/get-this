@@ -19,7 +19,7 @@
 h1 a {
   color: inherit;
   text-decoration-color: var(--color-teal-400);
-  text-underline-offset: var(--space-xx-small);
+  text-underline-offset: 0.25rem;
 }
 
 h1 a:not(:hover) {
