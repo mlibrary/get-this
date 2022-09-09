@@ -36,11 +36,11 @@ body {
 
 main {
   flex-grow: 1;
-  margin-bottom: var(--space-x-large);
+  margin-bottom: 2rem;
 }
 
 main > * + * {
-  margin-top: var(--space-x-large);
+  margin-top: 2rem;
 }
 
 @media (min-width: 1000px) {
@@ -48,7 +48,7 @@ main > * + * {
     align-content: start;
     align-items: flex-start;
     display: grid;
-    gap: 0 var(--space-xxx-large);
+    gap: 0 3rem;
     grid-template-areas:
       "title title"
       "flash flash"

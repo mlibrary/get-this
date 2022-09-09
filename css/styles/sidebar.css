@@ -22,11 +22,11 @@
 aside {
   grid-area: sidebar;
   position: sticky;
-  top: var(--space-x-large);
+  top: 2rem;
 }
 
 aside > * + * {
-  margin-top: var(--space-x-large);
+  margin-top: 2rem;
 }
 
 
@@ -52,7 +52,7 @@ aside dl.record {
 }
 
 aside dl.record > dt {
-  padding-right: var(--space-x-large);
+  padding-right: 2rem;
 }
 
 /*** 2.2 - Service Info ***/
@@ -66,11 +66,11 @@ aside ul.contact li {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-x-small);
+  gap: 0.5rem;
 }
 
 aside ul.contact li + li {
-  margin-top: var(--space-medium);
+  margin-top: 1rem;
 }
 
 aside ul.contact li svg {
