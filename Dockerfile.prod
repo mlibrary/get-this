@@ -27,6 +27,8 @@ RUN mkdir -p /gems && chown ${UID}:${GID} /gems
 
 COPY --chown=${UID}:${GID} . /app
 
+WORKDIR /app
+
 RUN --mount=type=secret,id=gh_package_read_token \
   read_token="$(cat /run/secrets/gh_package_read_token)" \
   && BUNDLE_RUBYGEMS__PKG__GITHUB__COM=${read_token} bundle install
@@ -36,7 +38,6 @@ USER $UNAME
 ENV BUNDLE_PATH /gems
 ENV BUNDLE_WITHOUT development:test
 
-WORKDIR /app
 
 RUN npm ci
 
