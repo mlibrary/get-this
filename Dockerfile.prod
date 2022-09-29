@@ -27,6 +27,9 @@ RUN mkdir -p /gems && chown ${UID}:${GID} /gems
 
 COPY --chown=${UID}:${GID} . /app
 
+ENV BUNDLE_PATH /gems
+ENV BUNDLE_WITHOUT development:test
+
 WORKDIR /app
 
 RUN --mount=type=secret,id=gh_package_read_token \
@@ -35,8 +38,6 @@ RUN --mount=type=secret,id=gh_package_read_token \
 
 USER $UNAME
 
-ENV BUNDLE_PATH /gems
-ENV BUNDLE_WITHOUT development:test
 
 
 RUN npm ci
