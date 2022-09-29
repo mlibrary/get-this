@@ -2,7 +2,6 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem "sinatra"
-gem "httparty"
 gem "puma"
 gem "yabeda-puma-plugin"
 gem "yabeda-prometheus"
