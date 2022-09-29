@@ -42,7 +42,7 @@ jobs:
     environment: testing
     steps:
     - name: Deploy to Testing
-      uses: mlibrary/deploy-to-kubernetes@v2
+      uses: mlibrary/deploy-to-kubernetes@v3
       with:
         registry_token: ${{ secrets.GITHUB_TOKEN }}
         image: ghcr.io/mlibrary/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
@@ -57,7 +57,7 @@ jobs:
     environment: staging
     steps:
     - name: Deploy to Staging
-      uses: mlibrary/deploy-to-kubernetes@v2
+      uses: mlibrary/deploy-to-kubernetes@v3
       with:
         registry_token: ${{ secrets.GITHUB_TOKEN }}
         image: ghcr.io/mlibrary/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
