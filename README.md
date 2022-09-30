@@ -17,19 +17,7 @@ copy .env-example to .env
 cp .env-example .env
 ```
 
-edit .env with the following environment variables.
-
-```ruby
-#.env
-ALMA_API_KEY='YOUR-ALMA-API-KEY'
-ALMA_API_HOST='https://api-na.hosted.exlibrisgroup.com'
-RACK_COOKIE_SECRET='rack_cookie_secret'
-GET_THIS_BASE_URL='http://localhost:4567'
-WEBLOGIN_SECRET='YOUR-WEBLOGIN-SECRET'
-WEBLOGIN_ID='YOUR-WEBLOGIN-ID'
-WEBLOGIN_ON='false'
-ACCOUNT_URL='https://account.lib.umich.edu'
-```
+edit .env with actual environment variables; ask a developer if you need them
 
 build container
 ```
@@ -51,9 +39,10 @@ build css
 docker-compose run --rm web npm run build
 ```
 
-copy over the css
+build the css
+
 ```
-cp js/* public/bundles/
+docker-compose run --rm web npm run build
 ```
 
 start containers
@@ -61,12 +50,21 @@ start containers
 docker-compose up -d
 ```
 
-run npm scripts directly
+
+## Updating `institution_hours_exceptions.json`
+
+`config/institution_hours_exceptions.json` is a static file that needs to be updated yearly.
+
+### Steps
+
+1. Verify that you are using a production Alma API Key.
+
+2. Run the script
 
 ```
-docker compose run --rm web bash
-...
-$ npm run build
-...
-exit
+docker-compose run --rm web ruby bin/update_alma_config.rb
 ```
+
+The file `config/institution_hours_exceptions.json` will get replaced with the latest information.
+
+3. Commit the file and go through the app release process. 

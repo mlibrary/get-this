@@ -101,7 +101,7 @@ describe Option::MediaBooking, ".book" do
       pickup_location_type: "LIBRARY",
       pickup_location_library: "SHAP",
       booking_start_date: "2021-10-24T15:00:00-04:00",
-      booking_end_date: "2021-10-26T15:00:00-04:00"
+      booking_end_date: "2021-10-31T15:00:00-04:00"
     }
     @item_req = stub_alma_get_request(url: "items", output: @item.to_json, query: {item_barcode: @barcode, expand: "due_date"})
     booking_url = "bibs/#{@item["bib_data"]["mms_id"]}/holdings/#{@item["holding_data"]["holding_id"]}/items/#{@item["item_data"]["pid"]}/booking-availability"

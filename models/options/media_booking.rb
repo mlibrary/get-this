@@ -16,7 +16,7 @@ class Option
         pickup_location_type: "LIBRARY",
         pickup_location_library: pickup_location,
         booking_start_date: start_date.to_fs(:iso8601),
-        booking_end_date: (start_date + 2.days).to_fs(:iso8601)
+        booking_end_date: (start_date + 7.days).to_fs(:iso8601)
       }.to_json)
     end
 
