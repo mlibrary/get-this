@@ -4,7 +4,11 @@ class Item
   end
 
   def self.for(barcode, options = {})
-    client = options[:alma_client] || AlmaRestClient.client
+    client = options[:alma_client] || AlmaRestClient.client(
+      Faraday.new do |f|
+        f.response :follow_redirects
+      end
+    )
     alma_response = client.get("/items", query: {item_barcode: barcode, expand: "due_date"})
     if alma_response.status == 200
       Item.new(data: alma_response.body)

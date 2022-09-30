@@ -2,6 +2,7 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem "sinatra"
+gem "faraday-follow_redirects"
 gem "puma"
 gem "yabeda-puma-plugin"
 gem "yabeda-prometheus"
