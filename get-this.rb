@@ -6,6 +6,7 @@ require "active_support/all"
 require "omniauth"
 require "omniauth_openid_connect"
 require "sinatra/flash"
+require "faraday/follow_redirects"
 #
 # Monkey patch for omniauth_openid_connect -> openid_connect -> webfinger -> httpclient SSL errors
 require_relative "./lib/monkey_httpclient"
@@ -117,14 +118,14 @@ post "/booking" do
     logger.info "Requesting barcode: #{barcode}; for pickup on #{params[:date]}; for pickup at #{params["pickup-location"]}"
     response = Option::MediaBooking.book(uniqname: session[:uniqname], barcode: barcode, booking_date: params[:date], pickup_location: params["pickup-location"])
   rescue
-    response = OpenStruct.new(code: 500, parsed_response: "rejected before sent to Alma")
+    response = OpenStruct.new(code: 500, body: "rejected before sent to Alma")
   end
-  if response.code != 200
-    logger.error response.parsed_response
+  if response.status != 200
+    logger.error response.body
     flash[:critical] = "Item was not able to be scheduled for pickup"
     redirect request.referrer
   else
-    data = response.parsed_response
+    data = response.body
     title = data["title"]
     pickup_date = Time.zone.parse(data["booking_start_date"]).to_date.strftime("%A, %B %-d, %Y")
     pickup_location = data["pickup_location"]

@@ -18,6 +18,7 @@ require "rack/test"
 require "rspec"
 require "pry-byebug"
 require "webmock/rspec"
+require "httpx/adapters/webmock"
 require "simplecov"
 require "climate_control"
 SimpleCov.start
@@ -27,6 +28,7 @@ require File.expand_path "../../get-this.rb", __FILE__
 OmniAuth.config.test_mode = true
 module RSpecMixin
   include Rack::Test::Methods
+  include AlmaRestClient::Test::Helpers
   def app = Sinatra::Application
 end
 RSpec.configure do |config|
@@ -112,23 +114,6 @@ RSpec.configure do |config|
   #   # test failures related to randomization by passing the same `--seed` value
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
-end
-[:get, :post, :put, :delete].each do |name|
-  define_method("stub_alma_#{name}_request") do |url:, input: nil, output: "", status: 200, query: nil|
-    req_attributes = {}
-    req_attributes[:headers] = {
-      :accept => "application/json",
-      :Authorization => "apikey #{ENV["ALMA_API_KEY"]}",
-      "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-      "User-Agent" => "Ruby",
-      "Content-Type" => "application/json"
-    }
-    req_attributes[:body] = input unless input.nil?
-    req_attributes[:query] = query unless query.nil?
-    resp = {headers: {content_type: "application/json"}, status: status, body: output}
-
-    stub_request(name, "#{ENV["ALMA_API_HOST"]}/almaws/v1/#{url}").with(**req_attributes).to_return(**resp)
-  end
 end
 def fixture(path)
   File.read("./spec/fixtures/#{path}")

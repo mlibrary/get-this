@@ -24,8 +24,8 @@ class Option
       client = options[:alma_client] || AlmaRestClient.client
       today = options[:today] || Time.zone.today
       alma_response = client.get("/bibs/#{item.mms_id}/holdings/#{item.holding_id}/items/#{item.pid}/booking-availability", query: {period: 9, period_type: "months"})
-      if alma_response.code == 200
-        new(booking_data: alma_response.parsed_response, item: item, today: today)
+      if alma_response.status == 200
+        new(booking_data: alma_response.body, item: item, today: today)
       end
     end
 

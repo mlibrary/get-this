@@ -11,6 +11,7 @@ env:
 
 jobs:
   build:
+    name: Build ${{ github.sha }}
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     environment: testing
@@ -29,6 +30,8 @@ jobs:
       with:
         context: .
         file: Dockerfile.prod
+        secrets: |
+          "gh_package_read_token=${{ secrets.GH_PACKAGE_READ_TOKEN }}"
         push: true
         tags: | 
            ghcr.io/mlibrary/${{ secrets.IMAGE_NAME }}:latest
@@ -40,7 +43,7 @@ jobs:
     environment: testing
     steps:
     - name: Deploy to Testing
-      uses: mlibrary/deploy-to-kubernetes@v2
+      uses: mlibrary/deploy-to-kubernetes@v3
       with:
         registry_token: ${{ secrets.GITHUB_TOKEN }}
         image: ghcr.io/mlibrary/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
@@ -55,7 +58,7 @@ jobs:
     environment: staging
     steps:
     - name: Deploy to Staging
-      uses: mlibrary/deploy-to-kubernetes@v2
+      uses: mlibrary/deploy-to-kubernetes@v3
       with:
         registry_token: ${{ secrets.GITHUB_TOKEN }}
         image: ghcr.io/mlibrary/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
