@@ -7,8 +7,8 @@
       },
       "inherited": false,
       "desc": "Memorial Day",
-      "from_date": "2021-05-31Z",
-      "to_date": "2021-05-31Z",
+      "from_date": "2022-05-30Z",
+      "to_date": "2022-05-30Z",
       "from_hour": "00:00",
       "to_hour": "23:59",
       "status": {
@@ -23,8 +23,8 @@
       },
       "inherited": false,
       "desc": "Independence Day (observed)",
-      "from_date": "2021-07-05Z",
-      "to_date": "2021-07-05Z",
+      "from_date": "2022-07-04Z",
+      "to_date": "2022-07-04Z",
       "from_hour": "00:00",
       "to_hour": "23:59",
       "status": {
@@ -39,8 +39,8 @@
       },
       "inherited": false,
       "desc": "Labor Day",
-      "from_date": "2021-09-06Z",
-      "to_date": "2021-09-06Z",
+      "from_date": "2022-09-05Z",
+      "to_date": "2022-09-05Z",
       "from_hour": "00:00",
       "to_hour": "23:59",
       "status": {
@@ -55,8 +55,8 @@
       },
       "inherited": false,
       "desc": "Thanksgiving",
-      "from_date": "2021-11-25Z",
-      "to_date": "2021-11-26Z",
+      "from_date": "2022-11-24Z",
+      "to_date": "2022-11-25Z",
       "from_hour": "00:00",
       "to_hour": "23:59",
       "status": {
@@ -70,9 +70,9 @@
         "desc": "Exception"
       },
       "inherited": false,
-      "desc": "Christmas",
-      "from_date": "2021-12-24Z",
-      "to_date": "2021-12-30Z",
+      "desc": "Winter Holidays",
+      "from_date": "2022-12-26Z",
+      "to_date": "2023-01-02Z",
       "from_hour": "00:00",
       "to_hour": "23:59",
       "status": {
@@ -82,34 +82,15 @@
     },
     {
       "type": {
-        "value": "EXCEPTION",
-        "desc": "Exception"
+        "value": "EVENT",
+        "desc": "Event"
       },
       "inherited": false,
-      "desc": "New Year's Eve",
-      "from_date": "2021-12-31Z",
-      "to_date": "2021-12-31Z",
-      "from_hour": "00:00",
-      "to_hour": "23:59",
+      "desc": "End of Term",
+      "from_date": "2023-01-06Z",
       "status": {
-        "value": "CLOSE",
-        "desc": "Closed"
-      }
-    },
-    {
-      "type": {
-        "value": "EXCEPTION",
-        "desc": "Exception"
-      },
-      "inherited": false,
-      "desc": "New Year's Day",
-      "from_date": "2022-01-01Z",
-      "to_date": "2022-01-01Z",
-      "from_hour": "00:00",
-      "to_hour": "23:59",
-      "status": {
-        "value": "CLOSE",
-        "desc": "Closed"
+        "value": "OPEN",
+        "desc": "Open"
       }
     }
   ]
