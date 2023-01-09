@@ -20,7 +20,7 @@ env:
 
 jobs:
   deploy-unstable:
-    name: Deploy ${{ github.event.inputs.tag }} to ${{ github.events.inputs.tanka_env }}
+    name: Deploy ${{ github.event.inputs.tag }} to ${{ github.event.inputs.tanka_env }}
     runs-on: ubuntu-latest
     steps:
     - name: Clone latest repository
@@ -76,7 +76,12 @@ jobs:
         app_id: ${{ secrets.SEARCH_CONFIG_REPO_RW_APP_ID }}
         installation_id: ${{ secrets.SEARCH_CONFIG_REPO_RW_INSTALL_ID }}
         private_key: ${{ secrets.SEARCH_CONFIG_REPO_RW_KEY }}
-    - name: Set Payload
+    - name: Set message
+      id: set_message
+      run: |
+        echo "TITLE=Update ${{ github.event.inputs.tanka_env }} to ${{ steps.tag_check.outputs.tag }}" >> $GITHUB_OUTPUT 
+        echo "DESCRIPTION=Originating repository is ${{ github.repository }}\nRun ID is $GITHUB_RUN_ID\nUser is ${{ github.actor }}" >> $GITHUB_OUTPUT
+    - name: Set PAYLOAD
       run: |
         data=$(echo '[
           { 
@@ -85,7 +90,7 @@ jobs:
             "image": "ghcr.io/mlibrary/${{ env.IMAGE_NAME }}:${{ steps.tag_check.outputs.tag }}" 
           }
         ]' | python -c 'import json, sys;var=json.dumps(json.load(sys.stdin));print(json.dumps(var))' )
-        echo "PAYLOAD={ \"data\": $data }" >> $GITHUB_ENV
+        echo "PAYLOAD={\"title\": \"${{ steps.set_message.outputs.TITLE }}\",\"description\": \"${{ steps.set_message.outputs.DESCRIPTION }}\", \"data\": $data }" >> $GITHUB_ENV
     - name: echo payload
       run: echo $PAYLOAD
     - name: Send the message
