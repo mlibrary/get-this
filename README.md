@@ -34,11 +34,6 @@ npm install
 docker-compose run --rm web npm install
 ```
 
-build css
-```
-docker-compose run --rm web npm run build
-```
-
 build the css
 
 ```
