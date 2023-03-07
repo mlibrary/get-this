@@ -1,5 +1,6 @@
 class Option
   class MediaBooking < Option
+    PICKUP_LOCATIONS = YAML.load_file("./config/pickup_location_labels.yml")
     def self.match?(patron:, item:)
       patron.can_book? && item.bookable?
     end
@@ -77,7 +78,7 @@ class Option
     end
 
     def pickup_locations
-      YAML.load_file("./config/pickup_location_labels.yml").to_a.map do |code, display|
+      PICKUP_LOCATIONS.map do |code, display|
         OpenStruct.new(code: code, display: display)
       end
     end
