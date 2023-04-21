@@ -1,4 +1,4 @@
-name: Build latest from main and AutoDeploy to Testing and Staging
+name: Build latest from main and AutoDeploy to Testing
 
 on:
   workflow_run:
@@ -6,12 +6,9 @@ on:
     branches: [ 'main' ]
     types: [ completed ]
 
-env:
-  IMAGE_NAME: get-this-unstable
-
 jobs:
   build-unstable:
-    name: Build unstable ${{ github.event.inputs.tag }}
+    name: Build unstable ${{ github.sha }}
     uses: mlibrary/platform-engineering-workflows/.github/workflows/build-unstable.yml@v1
     with:
       image_name: ${{ vars.IMAGE_NAME }}
@@ -20,10 +17,10 @@ jobs:
 
   deploy-testing:
     needs: build-unstable
-    name: Deploy to ${{ github.event.inputs.tanka_env }}
+    name: Deploy to testing
     uses: mlibrary/platform-engineering-workflows/.github/workflows/deploy.yml@v1
     with:
-      image: ghcr.io/mlibrary/${{ vars.IMAGE_NAME }}-unstable:${{ github.event.inputs.tag }}
+      image: ghcr.io/mlibrary/${{ vars.IMAGE_NAME }}-unstable:${{ github.sha }}
       file: environments/get-this/testing/web-image.txt
       CONFIG_REPO_RW_APP_ID: ${{ vars.CONFIG_REPO_RW_APP_ID }}
       CONFIG_REPO_RW_INSTALL_ID: ${{ vars.CONFIG_REPO_RW_INSTALL_ID }}
