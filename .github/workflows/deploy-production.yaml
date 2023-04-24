@@ -7,16 +7,13 @@ on:
         description: Release
         required: true
 
-env:
-  IMAGE_NAME: get-this
-
 jobs:
   build-production:
     name: Build production ${{ github.event.inputs.tag }}
     uses: mlibrary/platform-engineering-workflows/.github/workflows/build-production.yml@v1
     with:
       image_name: ${{ vars.IMAGE_NAME }}
-      tag: ${{ github.event.release.tag_name }}
+      tag: ${{ github.event.inputs.tag }}
     secrets: inherit
 
   deploy-production:
