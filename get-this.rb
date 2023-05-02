@@ -7,9 +7,6 @@ require "omniauth"
 require "omniauth_openid_connect"
 require "sinatra/flash"
 require "faraday/follow_redirects"
-#
-# Monkey patch for omniauth_openid_connect -> openid_connect -> webfinger -> httpclient SSL errors
-require_relative "./lib/monkey_httpclient"
 
 Time.zone = "Eastern Time (US & Canada)"
 
