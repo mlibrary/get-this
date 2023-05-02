@@ -13,6 +13,7 @@ jobs:
     with:
       image_name: ${{ vars.IMAGE_NAME }}
       tag: ${{ github.sha }}
+      dockerfile: Dockerfile.prod
     secrets: inherit
 
   deploy-testing:
@@ -20,7 +21,7 @@ jobs:
     name: Deploy to testing
     uses: mlibrary/platform-engineering-workflows/.github/workflows/deploy.yml@v1
     with:
-      image: ghcr.io/mlibrary/${{ vars.IMAGE_NAME }}-unstable:${{ github.sha }}
+      image: ${{ needs.build-unstable.outputs.image }}
       file: environments/get-this/testing/web-image.txt
       CONFIG_REPO_RW_APP_ID: ${{ vars.CONFIG_REPO_RW_APP_ID }}
       CONFIG_REPO_RW_INSTALL_ID: ${{ vars.CONFIG_REPO_RW_INSTALL_ID }}
