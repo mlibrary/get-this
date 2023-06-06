@@ -1,8 +1,10 @@
-version: '3'
+version: '3.8'
 
 services:
   web:
-    build: .
+    build: 
+      context: .
+      target: development
     ports:
       - "4567:4567"
       - "9394:9394"
@@ -22,14 +24,18 @@ services:
       - 0.0.0.0
 
   css:
-    build: .
+    build: 
+      context: .
+      target: development
     volumes:
       - .:/app
       - gem_cache:/gems
     command: bundle exec ruby ./config/css-listener.rb
 
   js:
-    build: .
+    build:
+      context: .
+      target: development
     volumes:
       - .:/app
       - gem_cache:/gems
