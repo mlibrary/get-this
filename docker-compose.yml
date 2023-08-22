@@ -13,7 +13,7 @@ services:
       - gem_cache:/gems
     env_file:
       - .env
-      - .env-dev-values
+      - env.development
     command:
       - bundle 
       - exec 

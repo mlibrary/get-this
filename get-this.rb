@@ -10,13 +10,13 @@ require "faraday/follow_redirects"
 
 Time.zone = "Eastern Time (US & Canada)"
 
-require_relative "./lib/styled_flash"
-require_relative "./lib/utility"
-require_relative "./models/patron"
-require_relative "./models/item"
-require_relative "./models/options/media_booking"
-require_relative "./models/options"
-require_relative "./lib/closed_days"
+require_relative "lib/styled_flash"
+require_relative "lib/utility"
+require_relative "models/patron"
+require_relative "models/item"
+require_relative "models/options/media_booking"
+require_relative "models/options"
+require_relative "lib/closed_days"
 
 helpers StyledFlash
 enable :sessions

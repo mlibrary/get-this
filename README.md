@@ -11,40 +11,18 @@ git clone git@github.com:mlibrary/get-this.git
 cd get-this
 ```
 
-copy .env-example to .env
-
-```
-cp .env-example .env
-```
-
-edit .env with actual environment variables; ask a developer if you need them
-
-build container
-```
-docker-compose build
+run the `init.sh` script. 
+```bash
+./init.sh
 ```
 
-bundle install
-```
-docker-compose run --rm web bundle install
-```
-
-npm install
-```
-docker-compose run --rm web npm install
-```
-
-build the css
-
-```
-docker-compose run --rm web npm run build
-```
+edit .env with the appropriate environment variables 
 
 start containers
-```
+
+```bash
 docker-compose up -d
 ```
-
 
 ## Updating `institution_hours_exceptions.json`
 
