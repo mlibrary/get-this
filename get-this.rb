@@ -62,7 +62,7 @@ end
 
 before do
   Time.zone = "Eastern Time (US & Canada)"
-  pass if ["auth", "session_switcher", "logout", "login", "-"].include? request.path_info.split("/")[1]
+  pass if ["auth", "session_switcher", "logout", "login", "-", "favicon.svg"].include? request.path_info.split("/")[1]
 
   if dev_login?
     session[:uniqname] = "mlibrary.acct.testing1@gmail.com" unless session[:uniqname]
