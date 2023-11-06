@@ -21,7 +21,7 @@ edit .env with the appropriate environment variables
 start containers
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 ## Updating `institution_hours_exceptions.json`
@@ -35,7 +35,7 @@ docker-compose up -d
 2. Run the script
 
 ```
-docker-compose run --rm web ruby bin/update_alma_config.rb
+docker compose run --rm web ruby bin/update_alma_config.rb
 ```
 
 The file `config/institution_hours_exceptions.json` will get replaced with the latest information.
