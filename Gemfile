@@ -10,6 +10,7 @@ gem "activesupport" # in here because of timezone support
 gem "omniauth"
 gem "omniauth_openid_connect"
 gem "sinatra-flash"
+gem "rackup"
 
 source "https://rubygems.pkg.github.com/mlibrary" do
   gem "alma_rest_client", "~> 2.0"
