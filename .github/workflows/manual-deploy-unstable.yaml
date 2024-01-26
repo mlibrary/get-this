@@ -18,7 +18,7 @@ on:
 jobs:
   build-unstable:
     name: Build unstable ${{ github.event.inputs.tag }}
-    uses: mlibrary/platform-engineering-workflows/.github/workflows/build-unstable.yml@f19651ba0b0c633c94d5ddd79289a1033568b6fa
+    uses: mlibrary/platform-engineering-workflows/.github/workflows/build-unstable.yml@d286f58357bbff07a4a88a51db4e0f9033321883
     with:
       image_name: ${{ vars.IMAGE_NAME }}
       tag: ${{ github.event.inputs.tag }}
@@ -43,7 +43,7 @@ jobs:
   deploy:
     needs: build-unstable
     name: Deploy to ${{ github.event.inputs.tanka_env }}
-    uses: mlibrary/platform-engineering-workflows/.github/workflows/deploy.yml@f19651ba0b0c633c94d5ddd79289a1033568b6fa
+    uses: mlibrary/platform-engineering-workflows/.github/workflows/deploy.yml@d286f58357bbff07a4a88a51db4e0f9033321883
     with:
       image: ${{ needs.build-unstable.outputs.image }}
       file: environments/get-this/${{ github.event.inputs.tanka_env }}/web-image.txt
