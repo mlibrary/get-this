@@ -18,7 +18,7 @@ on:
 jobs:
   build-unstable:
     name: Build unstable ${{ github.event.inputs.tag }}
-    uses: mlibrary/platform-engineering-workflows/.github/workflows/build-unstable.yml@v1
+    uses: mlibrary/platform-engineering-workflows/.github/workflows/build-unstable.yml@988a561ebcc3d9becfad840efb1c2295e61c9dc2
     with:
       image_name: ${{ vars.IMAGE_NAME }}
       tag: ${{ github.event.inputs.tag }}
@@ -43,11 +43,11 @@ jobs:
   deploy:
     needs: build-unstable
     name: Deploy to ${{ github.event.inputs.tanka_env }}
-    uses: mlibrary/platform-engineering-workflows/.github/workflows/deploy.yml@v1
+    uses: mlibrary/platform-engineering-workflows/.github/workflows/deploy.yml@988a561ebcc3d9becfad840efb1c2295e61c9dc2
     with:
       image: ${{ needs.build-unstable.outputs.image }}
       file: environments/get-this/${{ github.event.inputs.tanka_env }}/web-image.txt
       CONFIG_REPO_RW_APP_ID: ${{ vars.CONFIG_REPO_RW_APP_ID }}
-      CONFIG_REPO_RW_INSTALL_ID: ${{ vars.CONFIG_REPO_RW_INSTALL_ID }}
+      #CONFIG_REPO_RW_INSTALL_ID: ${{ vars.CONFIG_REPO_RW_INSTALL_ID }}
       CONFIG_REPO_FULL_NAME: ${{ vars.CONFIG_REPO_FULL_NAME }}
     secrets: inherit
