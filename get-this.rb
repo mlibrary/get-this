@@ -25,13 +25,13 @@ set server: "puma", connections: []
 
 use OmniAuth::Builder do
   provider :openid_connect, {
-    issuer: "https://weblogin.lib.umich.edu",
+    issuer: ENV["OIDC_ISSUER"],
     discovery: true,
     client_auth_method: "jwks",
     scope: [:openid, :profile, :email],
     client_options: {
-      identifier: ENV["WEBLOGIN_ID"],
-      secret: ENV["WEBLOGIN_SECRET"],
+      identifier: ENV["OIDC_CLIENT_ID"],
+      secret: ENV["OIDC_CLIENT_SECRET"],
       redirect_uri: "#{ENV["GET_THIS_BASE_URL"]}/auth/openid_connect/callback"
     }
   }
