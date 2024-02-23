@@ -24,5 +24,8 @@ docker compose run --rm web bundle
 echo "📦 Installing Node modules"
 docker compose run --rm web npm install
 
-echo "📦 Building js and css"
+echo "📦 Building css"
 docker compose run --rm web npm run build
+
+echo "📦 Copying over js"
+cp js/* public/bundles/
