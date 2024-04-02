@@ -16,7 +16,7 @@ source "https://rubygems.pkg.github.com/mlibrary" do
   gem "alma_rest_client", "~> 2.0"
 end
 
-# In order to get rspec to work for ruby 3.1. Maybe later see if it's still necessary
+# In order to get rspec to work for ruby 3.3. Maybe later see if it's still necessary
 gem "net-smtp", require: false
 
 group :development do
