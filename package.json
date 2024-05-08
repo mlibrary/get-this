@@ -4,8 +4,9 @@
   "description": "Implements date picker for booking a media item",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "postcss ./css/get-this.css -d ./public/bundles"
+    "build": "npm run build:type --type=css && npm run build:type --type=js",
+    "build:type": "esbuild \"${npm_config_type}/*.${npm_config_type}\" --bundle --minify --outdir=public/bundles $*",
+    "build:watch": "npm run build:type --type=${npm_config_type} -- --watch"
   },
   "repository": {
     "type": "git",
@@ -18,9 +19,6 @@
   },
   "homepage": "https://github.com/mlibrary/get-this#readme",
   "devDependencies": {
-    "cssnano": "^7.0.1",
-    "postcss": "^8.4.38",
-    "postcss-cli": "^11.0.0",
-    "postcss-import": "^16.1.0"
+    "esbuild": "0.21.1"
   }
 }
