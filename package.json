@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/mlibrary/get-this#readme",
   "devDependencies": {
-    "esbuild": "0.21.1"
+    "esbuild": "0.21.4"
   }
 }
