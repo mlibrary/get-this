@@ -1,3 +1,15 @@
+GIT
+  remote: https://github.com/mlibrary/alma_rest_client
+  revision: 9606225d82480b6d1568902813ae9018dd8c1acc
+  tag: v2.0.0
+  specs:
+    alma_rest_client (2.0.0)
+      activesupport (~> 7.0, >= 4.2)
+      faraday
+      faraday-retry
+      httpx
+      rexml
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -44,13 +56,13 @@ GEM
       faraday (>= 1, < 3)
     faraday-net_http (3.1.0)
       net-http
-    faraday-retry (2.2.0)
+    faraday-retry (2.2.1)
       faraday (~> 2.0)
     ffi (1.16.3)
     hashdiff (1.1.0)
     hashie (5.0.0)
     http-2-next (1.0.3)
-    httpx (1.2.1)
+    httpx (1.2.5)
       http-2-next (>= 1.0.3)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
@@ -250,22 +262,12 @@ GEM
       puma
       yabeda (~> 0.5)
 
-GEM
-  remote: https://rubygems.pkg.github.com/mlibrary/
-  specs:
-    alma_rest_client (2.0.0)
-      activesupport (~> 7.0, >= 4.2)
-      faraday
-      faraday-retry
-      httpx
-      rexml
-
 PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
   activesupport
-  alma_rest_client (~> 2.0)!
+  alma_rest_client!
   climate_control
   faraday-follow_redirects
   listen

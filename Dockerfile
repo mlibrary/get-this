@@ -36,9 +36,7 @@ FROM development AS production
 COPY --chown=${UID}:${GID} . /app
 ENV BUNDLE_WITHOUT development:test
 
-RUN --mount=type=secret,id=github_token,uid=1000 \
-  github_token="$(cat /run/secrets/github_token)" \
-  && BUNDLE_RUBYGEMS__PKG__GITHUB__COM=${github_token} bundle install
+RUN bundle install
 
 RUN npm ci
 

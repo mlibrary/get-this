@@ -12,9 +12,9 @@ gem "omniauth_openid_connect"
 gem "sinatra-flash"
 gem "rackup"
 
-source "https://rubygems.pkg.github.com/mlibrary" do
-  gem "alma_rest_client", "~> 2.0"
-end
+gem "alma_rest_client",
+  git: "https://github.com/mlibrary/alma_rest_client",
+  tag: "v2.0.0"
 
 # In order to get rspec to work for ruby 3.3. Maybe later see if it's still necessary
 gem "net-smtp", require: false
