@@ -7,6 +7,7 @@ require "omniauth"
 require "omniauth_openid_connect"
 require "sinatra/flash"
 require "faraday/follow_redirects"
+require "ostruct"
 
 Time.zone = "Eastern Time (US & Canada)"
 
