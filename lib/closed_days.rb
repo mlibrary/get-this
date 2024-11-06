@@ -21,9 +21,7 @@ class ClosedDays
   end
 
   def closed_days_between(end_date:, start_date: Time.zone.today)
-    all_days.filter_map do |date|
-      date if date >= start_date && date <= end_date
-    end
+    all_days.select { |date| date >= start_date && date <= end_date }
   end
 
   def closed?(date)
