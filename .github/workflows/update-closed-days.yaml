@@ -1,0 +1,33 @@
+name: Update Closed Days
+
+on: 
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 8 1 * *' #8AM first of the month
+
+jobs:
+  update-closed-days:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create .env file
+        run: cat env.* > .env
+      - name: Load .env file
+        uses: xom9ikk/dotenv@v2.3.0
+      - name: Set up Ruby 3.3
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+        env: 
+          BUNDLE_RUBYGEMS__PKG__GITHUB__COM: ${{ secrets.GITHUB_TOKEN }}
+      - name: update closed days
+        env:
+          ALMA_API_KEY: $${{ secrets.ALMA_API_KEY }}
+        run: bundle exec ruby bin/update_alma_config.rb
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with: 
+          branch: update-closed-days
+          commit-message: "Update closed days"
+          title: "Update closed days" 
+          reviewers: niquerio, erinesullivan
