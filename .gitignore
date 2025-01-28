@@ -16,3 +16,6 @@ public/bundles/
 
 # macOS-specific files
 .DS_Store
+
+#this is so github actions doesn't try to add all the gems to the repo when updating the config file
+vendor/
