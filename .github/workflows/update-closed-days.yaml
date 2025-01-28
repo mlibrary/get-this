@@ -18,11 +18,12 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'
+          bundler-cache: true
         env: 
           BUNDLE_RUBYGEMS__PKG__GITHUB__COM: ${{ secrets.GITHUB_TOKEN }}
       - name: update closed days
         env:
-          ALMA_API_KEY: $${{ secrets.ALMA_API_KEY }}
+          ALMA_API_KEY: ${{ secrets.ALMA_API_KEY }}
         run: bundle exec ruby bin/update_alma_config.rb
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
