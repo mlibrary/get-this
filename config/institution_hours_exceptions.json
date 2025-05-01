@@ -6,19 +6,6 @@
         "desc": "Event"
       },
       "inherited": false,
-      "desc": "End of Term",
-      "from_date": "2025-05-02Z",
-      "status": {
-        "value": "OPEN",
-        "desc": "Open"
-      }
-    },
-    {
-      "type": {
-        "value": "EVENT",
-        "desc": "Event"
-      },
-      "inherited": false,
       "desc": "Reserves End of Term",
       "from_date": "2025-05-04Z",
       "status": {
@@ -56,6 +43,19 @@
       "status": {
         "value": "CLOSE",
         "desc": "Closed"
+      }
+    },
+    {
+      "type": {
+        "value": "EVENT",
+        "desc": "Event"
+      },
+      "inherited": false,
+      "desc": "End of Term",
+      "from_date": "2025-08-29Z",
+      "status": {
+        "value": "OPEN",
+        "desc": "Open"
       }
     },
     {
