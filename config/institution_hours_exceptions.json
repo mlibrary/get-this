@@ -2,19 +2,6 @@
   "open_hour": [
     {
       "type": {
-        "value": "EVENT",
-        "desc": "Event"
-      },
-      "inherited": false,
-      "desc": "Reserves End of Term",
-      "from_date": "2025-05-04Z",
-      "status": {
-        "value": "OPEN",
-        "desc": "Open"
-      }
-    },
-    {
-      "type": {
         "value": "EXCEPTION",
         "desc": "Exception"
       },
@@ -43,6 +30,19 @@
       "status": {
         "value": "CLOSE",
         "desc": "Closed"
+      }
+    },
+    {
+      "type": {
+        "value": "EVENT",
+        "desc": "Event"
+      },
+      "inherited": false,
+      "desc": "Reserves End of Term",
+      "from_date": "2025-08-21Z",
+      "status": {
+        "value": "OPEN",
+        "desc": "Open"
       }
     },
     {
@@ -81,7 +81,7 @@
       },
       "inherited": false,
       "desc": "Thanksgiving",
-      "from_date": "2025-11-26Z",
+      "from_date": "2025-11-27Z",
       "to_date": "2025-11-28Z",
       "from_hour": "00:00",
       "to_hour": "23:59",
