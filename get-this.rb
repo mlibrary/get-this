@@ -3,8 +3,6 @@ require "sinatra/reloader" if development?
 require "alma_rest_client"
 require "byebug" if development?
 require "active_support/all"
-require "omniauth"
-require "omniauth_openid_connect"
 require "sinatra/flash"
 require "faraday/follow_redirects"
 require "ostruct"
