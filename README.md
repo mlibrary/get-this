@@ -26,9 +26,14 @@ docker compose up -d
 
 ## Updating `institution_hours_exceptions.json`
 
-`config/institution_hours_exceptions.json` is a static file that needs to be updated yearly.
+`config/institution_hours_exceptions.json` is a static file that needs to be
+updated yearly.
 
-### Steps
+There is a github action that checks monthly for updates and then creates a
+pull request. By merging that pull request and making a release this will stay
+up-to-date.
+
+### Manual Steps
 
 1. Verify that you are using a production Alma API Key.
 
@@ -38,6 +43,7 @@ docker compose up -d
 docker compose run --rm web ruby bin/update_alma_config.rb
 ```
 
-The file `config/institution_hours_exceptions.json` will get replaced with the latest information.
+The file `config/institution_hours_exceptions.json` will get replaced with the
+latest information.
 
 3. Commit the file and go through the app release process. 
