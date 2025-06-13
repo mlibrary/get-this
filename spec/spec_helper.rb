@@ -22,10 +22,9 @@ require "httpx/adapters/webmock"
 require "simplecov"
 require "climate_control"
 SimpleCov.start
-ENV["RACK_ENV"] = "test"
+ENV["APP_ENV"] = "test"
 
 require File.expand_path "../../get-this.rb", __FILE__
-OmniAuth.config.test_mode = true
 module RSpecMixin
   include Rack::Test::Methods
   include AlmaRestClient::Test::Helpers
