@@ -24,68 +24,39 @@ enable :sessions
 set :session_secret, ENV["RACK_COOKIE_SECRET"]
 set server: "puma", connections: []
 
-use OmniAuth::Builder do
-  provider :openid_connect, {
-    issuer: ENV["OIDC_ISSUER"],
-    discovery: true,
-    client_auth_method: "jwks",
-    scope: [:openid, :profile, :email],
-    client_options: {
-      identifier: ENV["OIDC_CLIENT_ID"],
-      secret: ENV["OIDC_CLIENT_SECRET"],
-      redirect_uri: "#{ENV["GET_THIS_BASE_URL"]}/auth/openid_connect/callback"
-    }
-  }
-end
-get "/auth/openid_connect/callback" do
-  auth = request.env["omniauth.auth"]
-  info = auth[:info]
-  session[:authenticated] = true
-  session[:expires_at] = Time.now.utc + 1.hour
-  session[:uniqname] = info[:nickname]
-  redirect session.delete(:path_before_login) || "/"
+def dev_login?
+  settings.environment == :development
 end
 
-# :nocov:
-get "/auth/failure" do
-  "You are not authorized"
+def set_patron
+  uniqname = request.get_header("HTTP_X_AUTH_REQUEST_USER")
+  halt 401, "Unauthorized" if uniqname.nil?
+  session[:uniqname] = uniqname
 end
-# :nocov:
 
 get "/logout" do
   session.clear
   redirect "https://shibboleth.umich.edu/cgi-bin/logout?https://lib.umich.edu/"
 end
 
-get "/login" do
-  erb :login, locals: {has_js: true}
-end
-
 before do
   Time.zone = "Eastern Time (US & Canada)"
-  pass if ["auth", "session_switcher", "logout", "login", "-", "favicon.svg"].include? request.path_info.split("/")[1]
+  pass if ["session_switcher", "logout", "login", "-", "favicon.svg"].include? request.path_info.split("/")[1]
 
   if dev_login?
     session[:uniqname] = "mlibrary.acct.testing1@gmail.com" unless session[:uniqname]
     pass
   end
 
-  if !session[:authenticated] || Time.now.utc > session[:expires_at]
-    session[:path_before_login] = request.path_info
-    redirect "/login"
-  end
-end
-
-helpers do
-  def dev_login?
-    ENV["WEBLOGIN_ON"] == "false" && settings.environment == :development
-  end
+  set_patron
 end
 
 # :nocov:
-post "/session_switcher" do
-  session[:uniqname] = params[:uniqname]
-  redirect "/#{params[:item]}"
+if dev_login?
+  post "/session_switcher" do
+    session[:uniqname] = params[:uniqname]
+    redirect "/#{params[:item]}"
+  end
 end
 # :nocov:
 
