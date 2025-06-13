@@ -7,14 +7,12 @@ gem "puma"
 gem "yabeda-puma-plugin"
 gem "yabeda-prometheus"
 gem "activesupport" # in here because of timezone support
-gem "omniauth"
-gem "omniauth_openid_connect"
 gem "sinatra-flash"
 gem "rackup"
 
 gem "alma_rest_client",
   git: "https://github.com/mlibrary/alma_rest_client",
-  tag: "v2.0.0"
+  tag: "alma_rest_client/v2.2.0"
 
 # In order to get rspec to work for ruby 3.3. Maybe later see if it's still necessary
 gem "net-smtp", require: false
