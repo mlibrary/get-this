@@ -44,10 +44,10 @@ describe "requests" do
   end
 
   context "/logout" do
-    it "clears the session and redirects to shibboleth" do
+    it "clears the session and redirects to oauth2/sign_out" do
       get "/logout"
       expect(last_request.env["rack.session"][:uniqname]).to be_nil
-      expect(last_response.location).to eq("https://shibboleth.umich.edu/cgi-bin/logout?https://lib.umich.edu/")
+      expect(last_response.location).to include("oauth2/sign_out")
     end
   end
 end
