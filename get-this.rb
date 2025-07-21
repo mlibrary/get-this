@@ -34,7 +34,9 @@ end
 
 get "/logout" do
   session.clear
-  redirect "https://shibboleth.umich.edu/cgi-bin/logout?https://lib.umich.edu/"
+  weblogin_logout_url = URI.encode_www_form_component("https://shibboleth.umich.edu/cgi-bin/logout?https://lib.umich.edu/")
+  log_out_url = "/oauth2/sign_out?rd=#{weblogin_logout_url}"
+  redirect log_out_url
 end
 
 before do
