@@ -12,10 +12,6 @@ multi-ecosystem-groups:
     commit-message:
       prefix: "Monthly dependency updates: "
     open-pull-requests-limit: 5
-    reviewers:
-      - "erinesullivan"
-      - "mrio"
-
 
 updates:
   # For npm/JavaScript dependencies
