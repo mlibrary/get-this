@@ -28,6 +28,7 @@ require File.expand_path "../../get-this.rb", __FILE__
 module RSpecMixin
   include Rack::Test::Methods
   include AlmaRestClient::Test::Helpers
+
   def app = Sinatra::Application
 end
 RSpec.configure do |config|
