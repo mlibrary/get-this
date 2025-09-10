@@ -1,6 +1,7 @@
 require "spec_helper"
 describe "requests" do
   include Rack::Test::Methods
+
   before(:each) do
     env "HTTP_X_AUTH_REQUEST_USER", "tutor"
   end

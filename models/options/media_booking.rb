@@ -11,6 +11,7 @@ class Option
 
       unavailable_dates = self.for(item, {today: today}).unavailable_dates
       raise StandardError if unavailable_dates.any? { |x| Date.parse(x) == start_date.to_date }
+
       # TBD error out if EmptyItem
       client.post("/users/#{uniqname}/requests", query: {item_pid: item.pid}, body: {
         request_type: "BOOKING",
