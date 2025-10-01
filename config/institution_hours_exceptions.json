@@ -100,7 +100,7 @@
       },
       "inherited": false,
       "desc": "End of Term",
-      "from_date": "2026-01-09Z",
+      "from_date": "2026-01-03Z",
       "status": {
         "value": "OPEN",
         "desc": "Open"
