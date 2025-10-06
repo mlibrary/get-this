@@ -1,7 +1,7 @@
 require "sinatra"
 require "sinatra/reloader" if development?
 require "alma_rest_client"
-require "byebug" if development?
+require "debug" if development?
 require "active_support/all"
 require "sinatra/flash"
 require "faraday/follow_redirects"

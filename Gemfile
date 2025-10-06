@@ -9,6 +9,7 @@ gem "yabeda-prometheus"
 gem "activesupport" # in here because of timezone support
 gem "sinatra-flash"
 gem "rackup"
+gem "ostruct"
 
 gem "alma_rest_client",
   git: "https://github.com/mlibrary/alma_rest_client",
@@ -23,8 +24,7 @@ group :development do
 end
 group :development, :test do
   gem "standard"
-  gem "pry"
-  gem "pry-byebug"
+  gem "debug"
   gem "rack-test"
   gem "rspec"
   gem "webmock"
